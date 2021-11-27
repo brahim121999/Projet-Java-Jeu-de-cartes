@@ -1,4 +1,4 @@
-package CapaciteSpecial;
+package CapaciteSpeciale;
 
 public class Lunatique {
 
