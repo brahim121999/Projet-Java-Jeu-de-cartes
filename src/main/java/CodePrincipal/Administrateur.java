@@ -103,7 +103,7 @@ public class Administrateur extends Utilisateur {
 	}
 	
 	// pour ajouter une équipe dans le jeu on doit vérifier qu'elle n'existe pas dans la liste des équipes du jeu 
-		public void ajouterEquipe(Equipe equipe) {
+	public void ajouterEquipe(Equipe equipe) {
 			
 			Integer nbr=0;
 			for (Equipe e : this.jeu.getListe_equipe()) {
