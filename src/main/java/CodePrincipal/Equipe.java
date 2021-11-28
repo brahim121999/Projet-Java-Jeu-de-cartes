@@ -36,17 +36,10 @@ public class Equipe {
 		return this.nom;
 	}
 	
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	
 	public List<Integer> getListe_joueur() {
 		return this.liste_joueur;
 	}
 	
-	public void setListe_joueur(List<Integer> liste_joueur) {
-		this.liste_joueur = liste_joueur;
-	}
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/

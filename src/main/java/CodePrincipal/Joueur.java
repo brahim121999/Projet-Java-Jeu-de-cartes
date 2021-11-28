@@ -84,17 +84,10 @@ public class Joueur {
 		return this.liste_equipe;
 	}
 	
-	public void setListe_equipe(List<Integer> liste_equipe) {
-		this.liste_equipe = liste_equipe;
-	}
-	
 	public List<Integer> getListe_score() {
 		return this.liste_score;
 	}
 	
-	public void setListe_score(List<Integer> liste_score) {
-		this.liste_score = liste_score;
-	}
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/

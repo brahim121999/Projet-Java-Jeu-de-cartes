@@ -30,12 +30,13 @@ public class Player extends Utilisateur{
 		this.Jeu=jeu;
 		jeu.getListe_utilisateur().add(this);
 		Player.nb+=1;
-		
 	}
 	
+	/*===============================================================================================*/
+	/*======================================= GETTER / SETTER =======================================*/
+	/*===============================================================================================*/
 	
 	public String getPseudo() {
-		
 		return pseudo;
 	}
 	
@@ -56,13 +57,6 @@ public class Player extends Utilisateur{
 		return id_utilisateur;
 	}
 	
-	
-	
-	
-	public void setBalance(Integer m) {
-		this.balance+=m;
-	}
-	
 	public double getBalance() {
 		
 		return this.balance;
@@ -73,11 +67,6 @@ public class Player extends Utilisateur{
 		return this.liste_carte;
 	}
 	
-	public void setListeCarte(Integer x) {
-		
-		this.liste_carte.add(x);
-	}
-	
 	public ArrayList<Integer> getCarteSemaineSuivante() {
 		
 		return this.carte_semaine_suivante;
@@ -85,43 +74,17 @@ public class Player extends Utilisateur{
 	
 	public void setCarteSemaineSuivante(ArrayList<Integer> suivante ) {
 		
-		for (int i=0;i<suivante.size() ;i++) {
-			this.carte_semaine_suivante.add(suivante.get(i));
-		}
-		
+		this.carte_semaine_suivante = suivante;
 	}
 	
 	public ArrayList<Integer> getCarteEnVente() {
 		
 		return this.carte_en_vente;
 	}
-	
-	public void setCarteEnVente(ArrayList<Integer> vente) {
-		
-		for (int i=0;i<vente.size() ;i++) {
-			this.carte_en_vente.add(vente.get(i));
-		}
-		
-	}
-	
 
 	public ArrayList<Integer> getCarteEchange() {
 		
 		return this.carte_echange;
-	}
-	
-	public void setCarteEchange(ArrayList<Integer> echange) {
-		
-		for (int i=0;i<echange.size() ;i++) {
-			this.carte_echange.add(echange.get(i));
-		}
-		
-	}
-	
-	public void calculScoreHebdo() {
-		
-		// ├а completer
-		// this.score_player=x ...
 	}
 	
 	public Integer getScore() {
@@ -129,16 +92,33 @@ public class Player extends Utilisateur{
 		return this.score_player;
 	}
 	
+	public void setScore(Integer score) {
+		
+		this.score_player = score;
+	}
+	
 	public ArrayList<Integer> getListeScore(){
 		
 		return this.liste_score;
 	}
 	
-	public void setListeScore(Integer score) {
-		
-		this.liste_score.add(score);
+	/*===============================================================================================*/
+	/*===============================================================================================*/
+	/*===============================================================================================*/
+	
+	public void augmenterBalance(double m) {
+		this.balance += m;
 	}
 	
+	public void diminuerBalance(Integer m) {
+		this.balance += m;
+	}
+	
+	public void calculScoreHebdo() {
+		
+		// ра completer
+		// this.score_player=x ...
+	}
 
 	
 	

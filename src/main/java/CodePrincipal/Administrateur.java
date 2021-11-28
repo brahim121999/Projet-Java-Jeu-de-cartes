@@ -16,8 +16,6 @@ public class Administrateur extends Utilisateur {
 		this.id_utilisateur=nb;
 		Administrateur.nb+=1;
 		this.jeu=jeu;
-		
-		
 	}
 	
 	public String getPseudo() {
@@ -43,8 +41,8 @@ public class Administrateur extends Utilisateur {
 	}
 	
 	public void ajouterCarte(Integer id_joueur) {
-		// ajouter des cartes d'un joueur dans le systÃ¨me
-		// Ã  completer
+		// ajouter des cartes d'un joueur dans le système
+		// à  completer
 		
 	}
 	
