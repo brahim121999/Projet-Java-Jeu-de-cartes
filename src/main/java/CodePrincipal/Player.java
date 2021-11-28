@@ -118,18 +118,54 @@ public class Player extends Utilisateur{
 		this.liste_score.add(score);
 	}
 	
+	// on ajoute la carte dans la liste des cartes en vente du joueur et dans la liste des cartes en vente du jeu
 	public void ajoutCarteEnVente(Carte x) {
 		this.Jeu.getListe_en_vente().add(x);
+		this.carte_en_vente.add(x.getIdCarte());
 	}
 	
+	// on ajoute la carte dans la liste des cartes à echanger du joueur et dans la liste des cartes à echanger du jeu
 	public void ajoutCarteEchange(Carte y) {
 		this.Jeu.getListe_carte_echange().add(y);
+		this.carte_echange.add(y.getIdCarte());
+	}
+	
+	// on supprime la carte de la liste des cartes en vente du joueur et de la liste des cartes en vente du jeu
+	public void supprimeCarteEnVente(Carte x) {
+		for (Integer c : this.carte_en_vente) {
+	            if (c == x.getIdCarte()) {
+	            	this.carte_en_vente.remove(c);
+	            	
+	            }
+	    }
+		for (Carte s : this.Jeu.getListe_en_vente()) {
+            if (s.getIdCarte() == x.getIdCarte()) {
+            	this.Jeu.getListe_en_vente().remove(s);
+            	
+            }
+		}
+	}
+	
+	// on supprime la carte de la liste des cartes à echanger du joueur et de la liste des cartes à echanger du jeu
+	public void supprimeCarteEchange(Carte x) {
+		for (Integer c : this.carte_echange) {
+	            if (c == x.getIdCarte()) {
+	            	this.carte_echange.remove(c);
+	            	
+	            }
+	    }
+		for (Carte s : this.Jeu.getListe_carte_echange()) {
+            if (s.getIdCarte() == x.getIdCarte()) {
+            	this.Jeu.getListe_carte_echange().remove(s);
+            	
+            }
+		}
 	}
 	
 	public void calculScoreHebdo() {
 		
 		// � completer
-		// this.score_player=x ...
+		
 	}
 
 	
