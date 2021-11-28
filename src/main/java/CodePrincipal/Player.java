@@ -106,14 +106,17 @@ public class Player extends Utilisateur{
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
+	// déposer de l'argent
 	public void augmenterBalance(double m) {
 		this.balance += m;
 	}
 	
+	// achat d'une carte
 	public void diminuerBalance(double m) {
 		this.balance -= m  ;
 	}
 	
+	// sauvegarde des performances hebdomadaires
 	public void ajoutListeScore(Integer score) {
 		this.liste_score.add(score);
 	}
@@ -164,7 +167,7 @@ public class Player extends Utilisateur{
 	
 	public void calculScoreHebdo() {
 		
-		// � completer
+		// à completer
 		
 	}
 
