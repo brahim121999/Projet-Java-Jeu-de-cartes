@@ -110,13 +110,25 @@ public class Player extends Utilisateur{
 		this.balance += m;
 	}
 	
-	public void diminuerBalance(Integer m) {
-		this.balance += m;
+	public void diminuerBalance(double m) {
+		this.balance -= m  ;
+	}
+	
+	public void ajoutListeScore(Integer score) {
+		this.liste_score.add(score);
+	}
+	
+	public void ajoutCarteEnVente(Carte x) {
+		this.Jeu.getListe_en_vente().add(x);
+	}
+	
+	public void ajoutCarteEchange(Carte y) {
+		this.Jeu.getListe_carte_echange().add(y);
 	}
 	
 	public void calculScoreHebdo() {
 		
-		// à  completer
+		// ï¿½ completer
 		// this.score_player=x ...
 	}
 
