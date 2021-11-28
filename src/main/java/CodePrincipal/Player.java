@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Player extends Utilisateur{
 	
-	private static Integer nb=0;
 	private double balance;
 	private ArrayList<Integer> liste_carte;
 	private ArrayList<Integer> carte_semaine_suivante;
@@ -12,30 +11,25 @@ public class Player extends Utilisateur{
 	public ArrayList<Integer> carte_echange;
 	public Integer score_player;
 	public ArrayList<Integer> liste_score;
-	private Jeu Jeu;
+	private Jeu jeu;
 	
 	
-	public Player(String nom, String password,Jeu jeu) {
-		
-		this.pseudo=nom;
-		this.mdp=password;
-		this.id_utilisateur=nb;
-		this.balance=10000;
+	public Player(String pseudo, String mdp, Jeu jeu) {
+		super(pseudo, mdp);
+		this.balance = 10000;
 		this.liste_carte= new ArrayList<Integer>();
-		this.carte_semaine_suivante=new ArrayList<Integer>(4);
-		this.carte_en_vente= new ArrayList<Integer>();
-		this.carte_echange= new ArrayList<Integer>();
-		this.score_player=0;
-		this.liste_score= new ArrayList<Integer>();
-		this.Jeu=jeu;
-		jeu.getListe_utilisateur().add(this);
-		Player.nb+=1;
+		this.carte_semaine_suivante = new ArrayList<Integer>(4);
+		this.carte_en_vente = new ArrayList<Integer>();
+		this.carte_echange = new ArrayList<Integer>();
+		this.score_player = 0;
+		this.liste_score = new ArrayList<Integer>();
+		this.jeu = jeu;
+		jeu.getListeUtilisateur().put(this.id_utilisateur, this);
 	}
 	
 	/*===============================================================================================*/
 	/*======================================= GETTER / SETTER =======================================*/
 	/*===============================================================================================*/
-	
 	public String getPseudo() {
 		return pseudo;
 	}
@@ -53,65 +47,54 @@ public class Player extends Utilisateur{
 	}
 	
 	public Integer getId() {
-		
 		return id_utilisateur;
 	}
 	
 	public double getBalance() {
-		
 		return this.balance;
 	}
 	
 	public ArrayList<Integer> getListeCarte(){
-		
 		return this.liste_carte;
 	}
 	
 	public ArrayList<Integer> getCarteSemaineSuivante() {
-		
 		return this.carte_semaine_suivante;
 	}
 	
 	public void setCarteSemaineSuivante(ArrayList<Integer> suivante ) {
-		
 		this.carte_semaine_suivante = suivante;
 	}
 	
 	public ArrayList<Integer> getCarteEnVente() {
-		
 		return this.carte_en_vente;
 	}
 
 	public ArrayList<Integer> getCarteEchange() {
-		
 		return this.carte_echange;
 	}
 	
 	public Integer getScore() {
-		
 		return this.score_player;
 	}
 	
 	public void setScore(Integer score) {
-		
 		this.score_player = score;
 	}
 	
 	public ArrayList<Integer> getListeScore(){
-		
 		return this.liste_score;
 	}
-	
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
-	// dÃ©poser de l'argent
+	// deposer de l'argent
 	public void augmenterBalance(double m) {
 		this.balance += m;
 	}
 	
-	// achat d'une carte
+	// retirer de l'argent
 	public void diminuerBalance(double m) {
 		this.balance -= m  ;
 	}
@@ -122,52 +105,74 @@ public class Player extends Utilisateur{
 	}
 	
 	// on ajoute la carte dans la liste des cartes en vente du joueur et dans la liste des cartes en vente du jeu
-	public void ajoutCarteEnVente(Carte x) {
-		this.Jeu.getListe_en_vente().add(x);
-		this.carte_en_vente.add(x.getIdCarte());
-	}
-	
-	// on ajoute la carte dans la liste des cartes Ã  echanger du joueur et dans la liste des cartes Ã  echanger du jeu
-	public void ajoutCarteEchange(Carte y) {
-		this.Jeu.getListe_carte_echange().add(y);
-		this.carte_echange.add(y.getIdCarte());
-	}
-	
-	// on supprime la carte de la liste des cartes en vente du joueur et de la liste des cartes en vente du jeu
-	public void supprimeCarteEnVente(Carte x) {
-		for (Integer c : this.carte_en_vente) {
-	            if (c == x.getIdCarte()) {
-	            	this.carte_en_vente.remove(c);
-	            	
-	            }
-	    }
-		for (Carte s : this.Jeu.getListe_en_vente()) {
-            if (s.getIdCarte() == x.getIdCarte()) {
-            	this.Jeu.getListe_en_vente().remove(s);
-            	
-            }
+	public void ajoutCarteEnVente(Integer id_carte) {
+		Carte carte = jeu.getListeCarte().get(id_carte);
+		
+		if(!this.liste_carte.contains(id_carte)) {
+			System.out.println("Vous ne possédez pas la carte");
+		}
+		else if(!carte.getDisponibilite()) {
+			System.out.println("La carte a déjà été mise en vente ou proposé en échange");
+		}
+		else {
+			carte.setDisponibilite(false);
+			jeu.mettreEnVente(carte);
+			this.carte_en_vente.add(id_carte);
+			System.out.println("La carte a été mise en vente avec succès");
 		}
 	}
 	
-	// on supprime la carte de la liste des cartes Ã  echanger du joueur et de la liste des cartes Ã  echanger du jeu
-	public void supprimeCarteEchange(Carte x) {
-		for (Integer c : this.carte_echange) {
-	            if (c == x.getIdCarte()) {
-	            	this.carte_echange.remove(c);
-	            	
-	            }
-	    }
-		for (Carte s : this.Jeu.getListe_carte_echange()) {
-            if (s.getIdCarte() == x.getIdCarte()) {
-            	this.Jeu.getListe_carte_echange().remove(s);
-            	
-            }
+	// on ajoute la carte dans la liste des cartes a echanger du joueur et dans la liste des cartes a echanger du jeu
+	public void ajoutCarteEchange(Integer id_carte) {
+		Carte carte = jeu.getListeCarte().get(id_carte);
+		
+		if(!this.liste_carte.contains(id_carte)) {
+			System.out.println("Vous ne possédez pas la carte");
+		}
+		else if(!carte.getDisponibilite()) {
+			System.out.println("La carte a déjà été mise en vente ou proposé en échange");
+		}
+		else {
+			carte.setDisponibilite(false);
+			jeu.mettreEnEchange(carte);
+			this.carte_echange.add(id_carte);
+			System.out.println("La carte a été proposé en échange avec succès");
+		}
+	}
+	
+	// on supprime la carte de la liste des cartes en vente du joueur et de la liste des cartes en vente du jeu
+	public void supprimeCarteEnVente(Integer id_carte) {
+		Carte carte = jeu.getListeCarte().get(id_carte);
+		
+		if(!this.carte_en_vente.contains(id_carte)) {
+			System.out.println("La carte n'est actuellement pas en vente");
+		}
+		else {
+			carte.setDisponibilite(true);
+			jeu.supprimerDeLaVente(id_carte);
+			this.carte_en_vente.remove(id_carte);
+			System.out.println("Suppression réussie");
+		}
+	}
+	
+	// on supprime la carte de la liste des cartes a echanger du joueur et de la liste des cartes a echanger du jeu
+	public void supprimeCarteEchange(Integer id_carte) {
+		Carte carte = jeu.getListeCarte().get(id_carte);
+		
+		if(!this.carte_echange.contains(id_carte)) {
+			System.out.println("La carte n'est actuellement pas proposé en échange");
+		}
+		else {
+			carte.setDisponibilite(true);
+			jeu.supprimerDeEchange(id_carte);
+			this.carte_echange.remove(id_carte);
+			System.out.println("Suppression réussie");
 		}
 	}
 	
 	public void calculScoreHebdo() {
 		
-		// Ã  completer
+		//a completer
 		
 	}
 

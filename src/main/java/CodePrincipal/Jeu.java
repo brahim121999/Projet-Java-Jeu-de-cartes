@@ -1,43 +1,42 @@
 package CodePrincipal;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import CapaciteSpeciale.Capacite_speciale;
 
 public class Jeu {
 	private int semaine;
-	private List<Utilisateur> liste_utilisateur;
-	private List<Equipe> liste_equipe;
-	private List<Joueur> liste_joueur;
-	private List<Carte> liste_carte;			//Liste des cartes implémentées dans le jeu
-	private List<Carte> liste_en_vente;			//Liste des cartes en ventes
-	private List<Carte> liste_carte_echange;	//Liste des cartes proposées en échange
-	private List<Carte> liste_carte_systeme;	//Liste des cartes n'appartenant à aucun joueur
-	private List<Classement_Player> liste_classement_utilisateur;	
-	private List<Classement_Joueur> liste_classement_joueur;
-	private List<Dataset> liste_dataset;
-	private List<Capacite_speciale> liste_capacite_speciale;
+	private Map<Integer, Utilisateur> liste_utilisateur;	//Couple id / objet
+	private Map<Integer, Equipe> liste_equipe;
+	private Map<Integer, Joueur> liste_joueur;
+	private Map<Integer, Carte> liste_carte;			//Liste des cartes implémentées dans le jeu
+	private Map<Integer, Carte> liste_en_vente;			//Liste des cartes en ventes
+	private Map<Integer, Carte> liste_carte_echange;	//Liste des cartes proposées en échange
+	private Map<Integer, Carte> liste_carte_systeme;	//Liste des cartes n'appartenant à aucun joueur
+	private Map<Integer, Classement_Player> liste_classement_utilisateur;	
+	private Map<Integer, Classement_Joueur> liste_classement_joueur;
+	private Map<Integer, Dataset> liste_dataset;
+	private Map<Integer, Capacite_speciale> liste_capacite_speciale;
 	
 	public Jeu() {
 		this.semaine = 0;
-		this.liste_utilisateur = new ArrayList<Utilisateur>();
-		this.liste_equipe = new ArrayList<Equipe>();
-		this.liste_joueur = new ArrayList<Joueur>();
-		this.liste_carte = new ArrayList<Carte>();
-		this.liste_en_vente = new ArrayList<Carte>();
-		this.liste_carte_echange = new ArrayList<Carte>();
-		this.liste_carte_systeme = new ArrayList<Carte>();
-		this.liste_classement_utilisateur = new ArrayList<Classement_Player>();
-		this.liste_classement_joueur = new ArrayList<Classement_Joueur>();
-		this.liste_dataset = new ArrayList<Dataset>();
-		this.liste_capacite_speciale = new ArrayList<Capacite_speciale>();
+		this.liste_utilisateur = new HashMap<Integer, Utilisateur>();
+		this.liste_equipe = new HashMap<Integer, Equipe>();
+		this.liste_joueur = new HashMap<Integer, Joueur>();
+		this.liste_carte = new HashMap<Integer, Carte>();
+		this.liste_en_vente = new HashMap<Integer, Carte>();
+		this.liste_carte_echange = new HashMap<Integer, Carte>();
+		this.liste_carte_systeme = new HashMap<Integer, Carte>();
+		this.liste_classement_utilisateur = new HashMap<Integer, Classement_Player>();
+		this.liste_classement_joueur = new HashMap<Integer, Classement_Joueur>();
+		this.liste_dataset = new HashMap<Integer, Dataset>();
+		this.liste_capacite_speciale = new HashMap<Integer, Capacite_speciale>();
 	}
 	
 	/*===============================================================================================*/
 	/*======================================= GETTER / SETTER =======================================*/
 	/*===============================================================================================*/
-	
 	public int getSemaine() {
 		return this.semaine;
 	}
@@ -46,84 +45,100 @@ public class Jeu {
 		this.semaine = semaine;
 	}
 	
-	public List<Utilisateur> getListe_utilisateur() {
+	public Map<Integer, Utilisateur> getListeUtilisateur() {
 		return this.liste_utilisateur;
 	}
 	
-	public void setListe_utilisateur(List<Utilisateur> liste_utilisateur) {
+	public void setListeUtilisateur(Map<Integer, Utilisateur> liste_utilisateur) {
 		this.liste_utilisateur = liste_utilisateur;
 	}
 	
-	public List<Equipe> getListe_equipe() {
+	public Map<Integer, Equipe> getListeEquipe() {
 		return this.liste_equipe;
 	}
 	
-	public void setListe_equipe(List<Equipe> liste_equipe) {
+	public void setListeEquipe(Map<Integer, Equipe> liste_equipe) {
 		this.liste_equipe = liste_equipe;
 	}
 	
-	public List<Joueur> getListe_Joueur() {
+	public Map<Integer, Joueur> getListeJoueur() {
 		return this.liste_joueur;
 	}
 	
-	public void setListe_joueur(List<Joueur> liste_joueur) {
+	public void setListeJoueur(Map<Integer, Joueur> liste_joueur) {
 		this.liste_joueur = liste_joueur;
 	}
 	
-	public List<Carte> getListe_carte() {
+	public Map<Integer, Carte> getListeCarte() {
 		return this.liste_carte;
 	}
 	
-	public void setListe_carte(List<Carte> liste_carte) {
+	public void setListeCarte(Map<Integer, Carte> liste_carte) {
 		this.liste_carte = liste_carte;
 	}
 	
-	public List<Carte> getListe_en_vente() {
+	public Map<Integer, Carte> getListeEnVente() {
 		return this.liste_en_vente;
 	}
 	
-	public void setListe_en_vente(List<Carte> liste_en_vente) {
+	public void setListeEnVente(Map<Integer, Carte> liste_en_vente) {
 		this.liste_en_vente = liste_en_vente;
 	}
 	
-	public List<Carte> getListe_carte_echange() {
+	public Map<Integer, Carte> getListeCarteEchange() {
 		return this.liste_carte_echange;
 	}
 	
-	public void setListe_carte_echange(List<Carte> liste_carte_echange) {
+	public void setListeCarteEchange(Map<Integer, Carte> liste_carte_echange) {
 		this.liste_carte_echange = liste_carte_echange;
 	}
 	
-	public List<Carte> getListe_carte_systeme() {
+	public Map<Integer, Carte> getListeCarteSysteme() {
 		return this.liste_carte_systeme;
 	}
 	
-	public void setListe_carte_systeme(List<Carte> liste_carte_systeme) {
+	public void setListeCarteSysteme(Map<Integer, Carte> liste_carte_systeme) {
 		this.liste_carte_systeme = liste_carte_systeme;
 	}
 	
-	public List<Classement_Player> getListe_classement_utilisateur() {
+	public Map<Integer, Classement_Player> getListeClassementUtilisateur() {
 		return this.liste_classement_utilisateur;
 	}
 	
-	public List<Classement_Joueur> getListe_classement_joueur() {
+	public Map<Integer, Classement_Joueur> getListeClassementJoueur() {
 		return this.liste_classement_joueur;
 	}
 	
-	public List<Dataset> getListe_dataset() {
+	public Map<Integer, Dataset> getListeDataset() {
 		return this.liste_dataset;
 	}
 	
-	public List<Capacite_speciale> getListe_capacite_speciale() {
+	public Map<Integer, Capacite_speciale> getListeCapaciteSpeciale() {
 		return this.liste_capacite_speciale;
 	}
 	
-	public void setListe_capacite_speciale(List<Capacite_speciale> liste_capacite_speciale) {
+	public void setListeCapaciteSpeciale(Map<Integer, Capacite_speciale> liste_capacite_speciale) {
 		this.liste_capacite_speciale = liste_capacite_speciale;
 	}
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/
+	
+	public void mettreEnVente(Carte carte) {
+		liste_en_vente.put(carte.getIdCarte(), carte);
+	}
+	
+	public void mettreEnEchange(Carte carte) {
+		liste_carte_echange.put(carte.getIdCarte(), carte);
+	}
+	
+	public void supprimerDeLaVente(int id_carte) {
+		liste_en_vente.remove(id_carte);
+	}
+	
+	public void supprimerDeEchange(int id_carte) {
+		liste_carte_echange.remove(id_carte);
+	}
 	
 	void afficherClassementJoueur() {
 		//affiche le dernier classement des joueurs en date

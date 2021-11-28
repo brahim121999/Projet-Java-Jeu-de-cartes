@@ -6,18 +6,15 @@ import enumeration.rarete;
 public class Administrateur extends Utilisateur {
 	
 	private Jeu jeu;
-	private static Integer nb=0;
 	
-	
-	public Administrateur(String nom, String password,Jeu jeu) {
-		
-		this.pseudo=nom;
-		this.mdp=password;
-		this.id_utilisateur=nb;
-		Administrateur.nb+=1;
+	public Administrateur(String pseudo, String mdp, Jeu jeu) {
+		super(pseudo, mdp);
 		this.jeu=jeu;
 	}
 	
+	/*===============================================================================================*/
+	/*======================================= GETTER / SETTER =======================================*/
+	/*===============================================================================================*/
 	public String getPseudo() {
 		
 		return pseudo;
@@ -39,91 +36,82 @@ public class Administrateur extends Utilisateur {
 		
 		return id_utilisateur;
 	}
+	/*===============================================================================================*/
+	/*===============================================================================================*/
+	/*===============================================================================================*/
 	
-	
-	// pour ajouter une carte dans le jeu on doit vérifier si le nombre de cartes permises par joueur en fonction de sa
-	// rareté n'est pas atteint
-	public void ajouterCarte(Carte carte) {
+	public void ajouterCarte(Integer id_joueur) {
+		int nb_capacite_spe = jeu.getListeCapaciteSpeciale().size() - 1; //on exclue la capacite "Aucune"
 		
-		  
-			Integer nbr=0;
-			for (Carte c : this.jeu.getListe_carte()) {
-				if (carte.getIdJoueur() == c.getIdJoueur()) {
-					nbr++;
-				}
-			}
-			
-			if ((carte.getRarete() == rarete.commune) && (nbr<1000) ) {
-				
-				this.jeu.getListe_carte().add(carte);
+		//creation des cartes communes
+		for(int i=0; i<1000; i++) {
+			double alea1 = Math.random();
+			//2 chance sur 10 d'avoir une capacite speciale
+			if(alea1 >= 0.8) {
+				int alea2 = (int)(Math.random() * nb_capacite_spe) + 1;
+				rarete rarete = enumeration.rarete.commune;
+				Carte carte = new Carte(id_joueur, rarete, alea2, this.jeu);
+				carte.ajouterCarte();
 			}
 			else {
-				
-				System.out.println("Le nombre de cartes permises pour ce joueur avec cette rareté est atteint");
+				rarete rarete = enumeration.rarete.commune;
+				Carte carte = new Carte(id_joueur, rarete, 0, this.jeu);
+				carte.ajouterCarte();
 			}
-			
-			if ((carte.getRarete() == rarete.peu_commune) && (nbr<100) ) {
-				
-				this.jeu.getListe_carte().add(carte);
-			}
-			else {
-				
-				System.out.println("Le nombre de cartes permises pour ce joueur avec cette rareté est atteint");
-			}
-			
-			if ((carte.getRarete() == rarete.rare) && (nbr<10) ) {
-				
-				this.jeu.getListe_carte().add(carte);
+		}
+		//creation des cartes peu communes
+		for(int i=0; i<100; i++) {
+			double alea1 = Math.random();
+			//2 chance sur 10 d'avoir une capacite speciale
+			if(alea1 >= 0.8) {
+				int alea2 = (int)(Math.random() * nb_capacite_spe) + 1;
+				rarete rarete = enumeration.rarete.peu_commune;
+				Carte carte = new Carte(id_joueur, rarete, alea2, this.jeu);
+				carte.ajouterCarte();
 			}
 			else {
-				
-				System.out.println("Le nombre de cartes permises pour ce joueur avec cette rareté est atteint");
+				rarete rarete = enumeration.rarete.peu_commune;
+				Carte carte = new Carte(id_joueur, rarete, 0, this.jeu);
+				carte.ajouterCarte();
 			}
+		}
+		//creation des cartes rares
+		for(int i=0; i<10; i++) {
+			double alea1 = Math.random();
+			//2 chance sur 10 d'avoir une capacite speciale
+			if(alea1 >= 0.8) {
+				int alea2 = (int)(Math.random() * nb_capacite_spe) + 1;
+				rarete rarete = enumeration.rarete.rare;
+				Carte carte = new Carte(id_joueur, rarete, alea2, this.jeu);
+				carte.ajouterCarte();
+			}
+			else {
+				rarete rarete = enumeration.rarete.rare;
+				Carte carte = new Carte(id_joueur, rarete, 0, this.jeu);
+				carte.ajouterCarte();
+			}
+		}
 	}
 	
-	// pour ajouter un joueur dans le jeu on doit vérifier qu'il n'existe pas dans la liste des joueurs du jeu 
-	public void ajouterJoueur(Joueur joueur) {
+	// pour ajouter un joueur dans le jeu
+	public void ajouterJoueur(Jeu jeu, String nom, String prenom, boolean poste, List<Integer> liste_equipe, List<Integer> liste_score) {
+		Joueur joueur = new Joueur(jeu, nom, prenom, poste, liste_equipe, liste_score);
 		
-		Integer nbr=0;
-		for (Joueur j : this.jeu.getListe_Joueur()) {
-			
-			if (j.getId_joueur() == joueur.getId_joueur()) {
+		//On ajoute le joueur a la liste des joueurs du jeu
+		jeu.getListeJoueur().put(joueur.getId_joueur(), joueur);
 				
-				nbr++;
+		//On ajoute le joueur a la liste des joueurs de ses equipes
+		for (int i=0; i<liste_equipe.size();i++) {
+			Equipe equipe = jeu.getListeEquipe().get(liste_equipe.get(i));
+			if (!equipe.getListe_joueur().contains(joueur.getId_joueur())) {
+				equipe.addPlayer(joueur.getId_joueur());
 			}
 		}
-		
-		if (nbr ==0) {
-			this.jeu.getListe_Joueur().add(joueur);
-		}
-		else {
-			System.out.println("Joueur déjà existant");
-		}
-		
 	}
 	
-	// pour ajouter une équipe dans le jeu on doit vérifier qu'elle n'existe pas dans la liste des équipes du jeu 
-	public void ajouterEquipe(Equipe equipe) {
-			
-			Integer nbr=0;
-			for (Equipe e : this.jeu.getListe_equipe()) {
-				
-				if (e.getId_equipe() == equipe.getId_equipe()) {
-					
-					nbr++;
-				}
-			}
-			
-			if (nbr ==0) {
-				this.jeu.getListe_equipe().add(equipe);
-			}
-			else {
-				System.out.println("Equipe déjà existante");
-			}
-			
-		}
-	
-	
-	
-
+	// pour ajouter une equipe dans le jeu
+	public void ajouterEquipe(Jeu jeu, String nom, List<Integer> liste_joueur) {
+		Equipe equipe = new Equipe(jeu, nom, liste_joueur);
+		jeu.getListeEquipe().put(equipe.getId_equipe(), equipe);
+	}
 }

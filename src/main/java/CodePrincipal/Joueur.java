@@ -10,7 +10,7 @@ public class Joueur {
 	private String prenom;
 	private boolean poste; 				//0 : gardien, 1 : joueur de champ
 	private List<Integer> liste_equipe;
-	private List<Integer> liste_score;	//Liste des scores du joueur par semaine, de la semaine 0 ï¿½ la semaine actuelle
+	private List<Integer> liste_score;	//Liste des scores du joueur par semaine, de la semaine 0 a la semaine actuelle
 	
 	public Joueur(Jeu jeu, String nom, String prenom, boolean poste, List<Integer> liste_equipe, List<Integer> liste_score) {
 		this.jeu = jeu;
@@ -21,24 +21,6 @@ public class Joueur {
 		this.liste_score = liste_score;
 		this.id_joueur = Joueur.nb;
 		Joueur.nb += 1;
-		
-		//On ajoute le joueur ï¿½ la liste des joueurs du jeu
-		jeu.getListe_Joueur().add(this);
-		
-		//On ajoute le joueur ï¿½ la liste des joueurs de ses ï¿½quipes
-		List<Equipe> equipes = jeu.getListe_equipe();
-		for (int i = 0; i < equipes.size(); i++) {
-			Equipe equipe = equipes.get(i);
-			for (int j = 0; j < liste_equipe.size(); j++) {
-				int id_equipe = liste_equipe.get(j);
-				if (equipe.getId_equipe() == id_equipe) {
-					//On verifie que le joueur n'est pas dï¿½jï¿½ prï¿½sent dans la liste des joueurs de l'ï¿½quipe
-					if (!equipe.getListe_joueur().contains(id_joueur)) {
-						equipe.getListe_joueur().add(id_joueur);
-					}
-				}
-			}
-		}
 	}
 	
 	/*===============================================================================================*/
@@ -80,11 +62,11 @@ public class Joueur {
 		this.poste = poste;
 	}
 	
-	public List<Integer> getListe_equipe() {
+	public List<Integer> getListeEquipe() {
 		return this.liste_equipe;
 	}
 	
-	public List<Integer> getListe_score() {
+	public List<Integer> getListeScore() {
 		return this.liste_score;
 	}
 	
@@ -93,10 +75,6 @@ public class Joueur {
 	/*===============================================================================================*/
 	
 	public void calculScoreHebdo() {
-		
-		// Ã  completer
-		
+		// a  completer
 	}
-	
-	
 }
