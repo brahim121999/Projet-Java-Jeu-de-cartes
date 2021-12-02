@@ -1,21 +1,17 @@
 package CapaciteSpeciale;
 
-import java.util.List;
-
-import CodePrincipal.Data;
-import CodePrincipal.Jeu;
+import CodePrincipal.Carte;
+import CodePrincipal.Classement;
 
 public class Aucune extends Capacite_speciale {
 	
-	public Aucune(Jeu jeu) {
+	public Aucune(Carte carte) {
+		super(carte);
 		this.nom = "Aucune";
 		this.description = "Cette capacité spéciale ne fait rien";
-		this.jeu = jeu;
 	}
 	
-	@Override
-	public double calculCapaciteSpeciale(double score, List<Data> data) {
-		return score;
+	public double calculScore(Classement classement) {
+		return carte.calculScore(classement);
 	}
-
 }

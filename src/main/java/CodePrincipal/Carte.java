@@ -2,7 +2,7 @@ package CodePrincipal;
 import enumeration.rarete;
 
 
-public class Carte {
+public class Carte extends CarteInterface{
 	
 	private static Integer nb=0;
 	private Integer id_carte;
@@ -33,6 +33,10 @@ public class Carte {
 	/*===============================================================================================*/
 	/*======================================= GETTER / SETTER =======================================*/
 	/*===============================================================================================*/
+	public Jeu getJeu() {
+		return this.jeu;
+	}
+	
 	public Integer getIdCarte() {
 		return this.id_carte;
 	}
@@ -67,6 +71,10 @@ public class Carte {
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/
+	
+	public double calculScore(Classement classement) {
+		return 0;
+	}
 }
 
 

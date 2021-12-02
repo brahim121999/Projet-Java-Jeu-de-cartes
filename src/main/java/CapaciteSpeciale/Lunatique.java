@@ -1,25 +1,23 @@
 package CapaciteSpeciale;
 
-import java.util.List;
-
-import CodePrincipal.Data;
-import CodePrincipal.Jeu;
+import CodePrincipal.Carte;
+import CodePrincipal.Classement;
 
 public class Lunatique extends Capacite_speciale{
 	
-	public Lunatique(Jeu jeu) {
+	public Lunatique(Carte carte) {
+		super(carte);
 		this.nom = "Lunatique";
 		this.description = "Donne un bonus de 2% les semaines paires et de -2% les semaines impaires";
-		this.jeu = jeu;
 	}
 	
 	@Override
-	public double calculCapaciteSpeciale(double score, List<Data> data) {
-		if(jeu.getSemaine() % 2 == 0) {
-			return score * 1.02;
+	public double calculScore(Classement classement) {
+		if(carte.getJeu().getSemaine() % 2 == 0) {
+			return carte.calculScore(classement) * 1.02;
 		}
 		else {
-			return score * 0.98;
+			return carte.calculScore(classement) * 0.98;
 		}
 	}
 }
