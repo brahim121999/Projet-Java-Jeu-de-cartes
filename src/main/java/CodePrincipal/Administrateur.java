@@ -1,6 +1,8 @@
 package CodePrincipal;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
+import CapaciteSpeciale.Capacite_speciale;
 import enumeration.rarete;
 
 public class Administrateur extends Utilisateur {
@@ -40,22 +42,23 @@ public class Administrateur extends Utilisateur {
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
-	public void ajouterCarte(Integer id_joueur) {
-		int nb_capacite_spe = jeu.getListeCapaciteSpeciale().size() - 1; //on exclue la capacite "Aucune"
+	public void ajouterCarte(Integer id_joueur) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		int nb_capacite_spe = jeu.getListeCapaciteSpeciale().size();
 		
 		//creation des cartes communes
 		for(int i=0; i<1000; i++) {
 			double alea1 = Math.random();
 			//2 chance sur 10 d'avoir une capacite speciale
 			if(alea1 >= 0.8) {
-				int alea2 = (int)(Math.random() * nb_capacite_spe) + 1;
+				Integer alea2 = (int)(Math.random() * nb_capacite_spe);
 				rarete rarete = enumeration.rarete.commune;
-				Carte carte = new Carte(id_joueur, rarete, alea2, this.jeu);
-				carte.ajouterCarte();
+				Carte carte = new Carte(id_joueur, rarete,this.jeu);
+				Capacite_speciale capacite = jeu.getListeCapaciteSpeciale().get(alea2).getClass().getDeclaredConstructor().newInstance(carte);
+				capacite.ajouterCarte();
 			}
 			else {
 				rarete rarete = enumeration.rarete.commune;
-				Carte carte = new Carte(id_joueur, rarete, 0, this.jeu);
+				Carte carte = new Carte(id_joueur, rarete, this.jeu);
 				carte.ajouterCarte();
 			}
 		}
@@ -64,14 +67,15 @@ public class Administrateur extends Utilisateur {
 			double alea1 = Math.random();
 			//2 chance sur 10 d'avoir une capacite speciale
 			if(alea1 >= 0.8) {
-				int alea2 = (int)(Math.random() * nb_capacite_spe) + 1;
+				Integer alea2 = (int)(Math.random() * nb_capacite_spe) + 1;
 				rarete rarete = enumeration.rarete.peu_commune;
-				Carte carte = new Carte(id_joueur, rarete, alea2, this.jeu);
-				carte.ajouterCarte();
+				Carte carte = new Carte(id_joueur, rarete, this.jeu);
+				Capacite_speciale capacite = jeu.getListeCapaciteSpeciale().get(alea2).getClass().getDeclaredConstructor().newInstance(carte);
+				capacite.ajouterCarte();
 			}
 			else {
 				rarete rarete = enumeration.rarete.peu_commune;
-				Carte carte = new Carte(id_joueur, rarete, 0, this.jeu);
+				Carte carte = new Carte(id_joueur, rarete, this.jeu);
 				carte.ajouterCarte();
 			}
 		}
@@ -80,14 +84,15 @@ public class Administrateur extends Utilisateur {
 			double alea1 = Math.random();
 			//2 chance sur 10 d'avoir une capacite speciale
 			if(alea1 >= 0.8) {
-				int alea2 = (int)(Math.random() * nb_capacite_spe) + 1;
+				Integer alea2 = (int)(Math.random() * nb_capacite_spe) + 1;
 				rarete rarete = enumeration.rarete.rare;
-				Carte carte = new Carte(id_joueur, rarete, alea2, this.jeu);
-				carte.ajouterCarte();
+				Carte carte = new Carte(id_joueur, rarete, this.jeu);
+				Capacite_speciale capacite = jeu.getListeCapaciteSpeciale().get(alea2).getClass().getDeclaredConstructor().newInstance(carte);
+				capacite.ajouterCarte();
 			}
 			else {
 				rarete rarete = enumeration.rarete.rare;
-				Carte carte = new Carte(id_joueur, rarete, 0, this.jeu);
+				Carte carte = new Carte(id_joueur, rarete, this.jeu);
 				carte.ajouterCarte();
 			}
 		}
