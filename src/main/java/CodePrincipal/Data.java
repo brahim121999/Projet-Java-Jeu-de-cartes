@@ -1,0 +1,70 @@
+package CodePrincipal;
+
+public class Data {
+	//represente la performance d'un joueur sur un match donne
+	
+	private int but;
+	private int passe_decisive;
+	private int tacle;
+	private double passe_reussie;	//en pourcentage
+	private int duel_gagne;
+	private int duel_aerien;
+	private int temps_de_jeu;		//en minute
+	private String poste;
+	private double note;
+	
+	public Data(int but, int passe_decisive, int tacle, double passe_reussie, int duel_gagne, int duel_aerien, int temps_de_jeu, String poste, double note) {
+		this.but = but;
+		this.passe_decisive = passe_decisive;
+		this.tacle = tacle;
+		this.passe_reussie = passe_reussie;
+		this.duel_gagne = duel_gagne;
+		this.duel_aerien = duel_aerien;
+		this.temps_de_jeu = temps_de_jeu;
+		this.poste = poste;
+		this.note = note;
+	}
+	
+	/*===============================================================================================*/
+	/*======================================= GETTER / SETTER =======================================*/
+	/*===============================================================================================*/
+	public int getBut() {
+		return this.but;
+	}
+	
+	public int getPasse_decisive() {
+		return this.passe_decisive;
+	}
+	
+	public int getTacle() {
+		return this.tacle;
+	}
+	
+	public double getPasse_reussie() {
+		return this.passe_reussie;
+	}
+	
+	public int getDuel_gagne() {
+		return this.duel_gagne;
+	}
+	
+	public int getDuel_aerien() {
+		return this.duel_aerien;
+	}
+	
+	public int getTemps_de_jeu() {
+		return this.temps_de_jeu;
+	}
+	
+	public String getPoste() {
+		return this.poste;
+	}
+	
+	public double getNote() {
+		return this.note;
+	}
+	/*===============================================================================================*/
+	/*===============================================================================================*/
+	/*===============================================================================================*/
+	
+}

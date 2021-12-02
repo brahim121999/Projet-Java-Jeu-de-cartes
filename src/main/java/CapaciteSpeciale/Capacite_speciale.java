@@ -45,10 +45,6 @@ public abstract class Capacite_speciale extends CarteInterface{
 		return carte.getRarete();
 	}
 	
-	public Integer getCapacite() {
-		return carte.getCapacite();
-	}
-	
 	public Integer getIdUtilisateur() {
 		return carte.getIdUtilisateur();
 	}
