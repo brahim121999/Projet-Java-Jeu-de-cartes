@@ -10,16 +10,17 @@ public class Jeu {
 	private Map<Integer, Utilisateur> liste_utilisateur;	//Couple id / objet
 	private Map<Integer, Equipe> liste_equipe;
 	private Map<Integer, Joueur> liste_joueur;
-	private Map<Integer, Carte> liste_carte;			//Liste des cartes implémentées dans le jeu
+	private Map<Integer, Carte> liste_carte;			//Liste des cartes implï¿½mentï¿½es dans le jeu
 	private Map<Integer, Carte> liste_en_vente;			//Liste des cartes en ventes
-	private Map<Integer, Carte> liste_carte_echange;	//Liste des cartes proposées en échange
-	private Map<Integer, Carte> liste_carte_systeme;	//Liste des cartes n'appartenant à aucun joueur
+	private Map<Integer, Carte> liste_carte_echange;	//Liste des cartes proposï¿½es en ï¿½change
+	private Map<Integer, Carte> liste_carte_systeme;	//Liste des cartes n'appartenant ï¿½ aucun joueur
 	private Map<Integer, Classement_Player> liste_classement_utilisateur;	
 	private Map<Integer, Classement_Joueur> liste_classement_joueur;
 	private Map<Integer, Dataset> liste_dataset;
 	private Map<Integer, Capacite_speciale> liste_capacite_speciale;
+	private static Jeu uniqueInstance = new Jeu();
 	
-	public Jeu() {
+	private Jeu() {
 		this.semaine = 0;
 		this.liste_utilisateur = new HashMap<Integer, Utilisateur>();
 		this.liste_equipe = new HashMap<Integer, Equipe>();
@@ -32,6 +33,10 @@ public class Jeu {
 		this.liste_classement_joueur = new HashMap<Integer, Classement_Joueur>();
 		this.liste_dataset = new HashMap<Integer, Dataset>();
 		this.liste_capacite_speciale = new HashMap<Integer, Capacite_speciale>();
+	}
+	
+	public static Jeu getInstance() {
+		return Jeu.uniqueInstance;
 	}
 	
 	/*===============================================================================================*/
@@ -145,7 +150,7 @@ public class Jeu {
 	}
 	
 	void afficherClassementJoueur(int semaine) {
-		//affiche le classement des joueurs de la semaine placée en paramètre
+		//affiche le classement des joueurs de la semaine placï¿½e en paramï¿½tre
 	}
 	
 	void afficherClassementPlayer() {
@@ -153,6 +158,6 @@ public class Jeu {
 	}
 	
 	void afficherClassementPlayer(int semaine) {
-		//affiche le classement des utilisateurs de la semaine placée en paramètre
+		//affiche le classement des utilisateurs de la semaine placï¿½e en paramï¿½tre
 	}
 }
