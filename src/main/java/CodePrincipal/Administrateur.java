@@ -1,6 +1,7 @@
 package CodePrincipal;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
+import CodePrincipal.Utilisateur;
 
 import CapaciteSpeciale.Capacite_speciale;
 import enumeration.rarete;

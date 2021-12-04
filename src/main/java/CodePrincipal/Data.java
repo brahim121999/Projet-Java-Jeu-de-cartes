@@ -3,17 +3,22 @@ package CodePrincipal;
 public class Data {
 	//represente la performance d'un joueur sur un match donne
 	
+	private String club; // à refaire en changeant le type en Equipe
+	private String nom;
 	private int but;
 	private int passe_decisive;
 	private int tacle;
 	private double passe_reussie;	//en pourcentage
 	private int duel_gagne;
 	private int duel_aerien;
+	private int duel_sol ;
 	private int temps_de_jeu;		//en minute
 	private String poste;
 	private double note;
 	
-	public Data(int but, int passe_decisive, int tacle, double passe_reussie, int duel_gagne, int duel_aerien, int temps_de_jeu, String poste, double note) {
+	public Data(String club, String nom,int but, int passe_decisive, int tacle, double passe_reussie, int duel_gagne, int duel_aerien, int duel_sol ,int temps_de_jeu, String poste, double note) {
+		this.club = club;
+		this.nom = nom;
 		this.but = but;
 		this.passe_decisive = passe_decisive;
 		this.tacle = tacle;
@@ -23,6 +28,7 @@ public class Data {
 		this.temps_de_jeu = temps_de_jeu;
 		this.poste = poste;
 		this.note = note;
+		this.duel_sol = duel_sol;
 	}
 	
 	/*===============================================================================================*/
@@ -62,6 +68,10 @@ public class Data {
 	
 	public double getNote() {
 		return this.note;
+	}
+	
+	public int getDuel_sol() {
+		return this.getDuel_sol();
 	}
 	/*===============================================================================================*/
 	/*===============================================================================================*/
