@@ -127,4 +127,21 @@ public class Dataset {
 			this.dataset.put(id, Donnees);
 		}
 	}
+	
+	/*===============================================================================================*/
+	/*======================================= GETTER / SETTER =======================================*/
+	/*===============================================================================================*/
+	
+	public int getSemaine() {
+		return this.semaine;
+	}
+	
+	public String getFIleName() {
+		return this.FILE_NAME;
+	}
+	
+	public String getPath() {
+		return this.RESOURCES_PATH;
+	}
+	
 }
