@@ -12,7 +12,7 @@ public class Jeu {
 	private Map<Integer, Joueur> liste_joueur;
 	private Map<Integer, Carte> liste_carte;			//Liste des cartes implï¿½mentï¿½es dans le jeu
 	private Map<Integer, Carte> liste_en_vente;			//Liste des cartes en ventes
-	private Map<Integer, Carte> liste_carte_echange;	//Liste des cartes proposï¿½es en ï¿½change
+	private Map<Integer, Echange> liste_echange;	//Liste des cartes proposï¿½es en ï¿½change
 	private Map<Integer, Carte> liste_carte_systeme;	//Liste des cartes n'appartenant ï¿½ aucun joueur
 	private Map<Integer, Classement_Player> liste_classement_utilisateur;	
 	private Map<Integer, Classement_Joueur> liste_classement_joueur;
@@ -27,7 +27,7 @@ public class Jeu {
 		this.liste_joueur = new HashMap<Integer, Joueur>();
 		this.liste_carte = new HashMap<Integer, Carte>();
 		this.liste_en_vente = new HashMap<Integer, Carte>();
-		this.liste_carte_echange = new HashMap<Integer, Carte>();
+		this.liste_echange = new HashMap<Integer, Echange>();
 		this.liste_carte_systeme = new HashMap<Integer, Carte>();
 		this.liste_classement_utilisateur = new HashMap<Integer, Classement_Player>();
 		this.liste_classement_joueur = new HashMap<Integer, Classement_Joueur>();
@@ -90,12 +90,12 @@ public class Jeu {
 		this.liste_en_vente = liste_en_vente;
 	}
 	
-	public Map<Integer, Carte> getListeCarteEchange() {
-		return this.liste_carte_echange;
+	public Map<Integer, Echange> getListeEchange() {
+		return this.liste_echange;
 	}
 	
-	public void setListeCarteEchange(Map<Integer, Carte> liste_carte_echange) {
-		this.liste_carte_echange = liste_carte_echange;
+	public void setListeCarteEchange(Map<Integer, Echange> liste_echange) {
+		this.liste_echange = liste_echange;
 	}
 	
 	public Map<Integer, Carte> getListeCarteSysteme() {
@@ -136,7 +136,7 @@ public class Jeu {
 		System.out.println("nombre de joueur : " + liste_joueur.size());
 		System.out.println("nombre de carte : " + liste_carte.size());
 		System.out.println("nombre de carte en vente : " + liste_en_vente.size());
-		System.out.println("nombre de carte en echange : " + liste_carte_echange.size());
+		System.out.println("nombre de d'echange : " + liste_echange.size());
 		System.out.println("nombre de carte du système : " + liste_carte_systeme.size());
 		System.out.println("nombre de classement utilisateur : " + liste_classement_utilisateur.size());
 		System.out.println("nombre de classement joueur : " + liste_classement_joueur.size());
@@ -168,8 +168,8 @@ public class Jeu {
 		liste_en_vente.put(carte.getIdCarte(), carte);
 	}
 	
-	public void mettreEnEchange(Carte carte) {
-		liste_carte_echange.put(carte.getIdCarte(), carte);
+	public void mettreEnEchange(Echange echange) {
+		liste_echange.put(echange.getIdEchange(), echange);
 	}
 	
 	public void supprimerDeLaVente(int id_carte) {
@@ -177,7 +177,7 @@ public class Jeu {
 	}
 	
 	public void supprimerDeEchange(int id_carte) {
-		liste_carte_echange.remove(id_carte);
+		liste_echange.remove(id_carte);
 	}
 	
 	void afficherClassementJoueur() {
@@ -185,7 +185,7 @@ public class Jeu {
 	}
 	
 	void afficherClassementJoueur(int semaine) {
-		//affiche le classement des joueurs de la semaine placï¿½e en paramï¿½tre
+		//affiche le classement des joueurs de la semaine places en parametre
 	}
 	
 	void afficherClassementPlayer() {

@@ -2,13 +2,15 @@ package CodePrincipal;
 
 import java.util.*;
 
+import enumeration.rarete;
+
 public class Player extends Utilisateur{
 	
 	private double balance;
 	private ArrayList<Integer> liste_carte;
 	private ArrayList<Integer> carte_semaine_suivante;
 	public ArrayList<Integer> carte_en_vente;
-	public ArrayList<Integer> carte_echange;
+	public ArrayList<Integer> echange;
 	public Integer score_player;
 	public ArrayList<Integer> liste_score;
 	private Jeu jeu;
@@ -20,7 +22,7 @@ public class Player extends Utilisateur{
 		this.liste_carte= new ArrayList<Integer>();
 		this.carte_semaine_suivante = new ArrayList<Integer>(4);
 		this.carte_en_vente = new ArrayList<Integer>();
-		this.carte_echange = new ArrayList<Integer>();
+		this.echange = new ArrayList<Integer>();
 		this.score_player = 0;
 		this.liste_score = new ArrayList<Integer>();
 		this.jeu = jeu;
@@ -71,7 +73,7 @@ public class Player extends Utilisateur{
 	}
 
 	public ArrayList<Integer> getCarteEchange() {
-		return this.carte_echange;
+		return this.echange;
 	}
 	
 	public Integer getScore() {
@@ -106,7 +108,7 @@ public class Player extends Utilisateur{
 	
 	// on ajoute la carte dans la liste des cartes en vente du joueur et dans la liste des cartes en vente du jeu
 	public void ajoutCarteEnVente(Integer id_carte, Integer prix) {
-		Carte carte = jeu.getListeCarte().get(id_carte);
+		Carte carte = jeu.getCarte(id_carte);
 		carte.setPrix(prix);
 		
 		if(!this.liste_carte.contains(id_carte)) {
@@ -124,8 +126,8 @@ public class Player extends Utilisateur{
 	}
 	
 	// on ajoute la carte dans la liste des cartes a echanger du joueur et dans la liste des cartes a echanger du jeu
-	public void ajoutCarteEchange(Integer id_carte) {
-		Carte carte = jeu.getListeCarte().get(id_carte);
+	public void ajoutCarteEchange(Integer id_carte, rarete rarete_attendue, Integer joueur_attendu) {
+		Carte carte = jeu.getCarte(id_carte);
 		
 		if(!this.liste_carte.contains(id_carte)) {
 			System.out.println("Vous ne possédez pas la carte");
@@ -135,15 +137,16 @@ public class Player extends Utilisateur{
 		}
 		else {
 			carte.setDisponibilite(false);
-			jeu.mettreEnEchange(carte);
-			this.carte_echange.add(id_carte);
+			Echange echange = new Echange(id_utilisateur, id_carte, rarete_attendue, joueur_attendu);
+			jeu.mettreEnEchange(echange);
+			this.echange.add(echange.getIdEchange());
 			System.out.println("La carte a été proposé en échange avec succès");
 		}
 	}
 	
 	// on supprime la carte de la liste des cartes en vente du joueur et de la liste des cartes en vente du jeu
 	public void supprimeCarteEnVente(Integer id_carte) {
-		Carte carte = jeu.getListeCarte().get(id_carte);
+		Carte carte = jeu.getCarte(id_carte);
 		
 		if(!this.carte_en_vente.contains(id_carte)) {
 			System.out.println("La carte n'est actuellement pas en vente");
@@ -158,15 +161,15 @@ public class Player extends Utilisateur{
 	
 	// on supprime la carte de la liste des cartes a echanger du joueur et de la liste des cartes a echanger du jeu
 	public void supprimeCarteEchange(Integer id_carte) {
-		Carte carte = jeu.getListeCarte().get(id_carte);
+		Carte carte = jeu.getCarte(id_carte);
 		
-		if(!this.carte_echange.contains(id_carte)) {
+		if(!this.echange.contains(id_carte)) {
 			System.out.println("La carte n'est actuellement pas proposé en échange");
 		}
 		else {
 			carte.setDisponibilite(true);
 			jeu.supprimerDeEchange(id_carte);
-			this.carte_echange.remove(id_carte);
+			this.echange.remove(id_carte);
 			System.out.println("Suppression réussie");
 		}
 	}
