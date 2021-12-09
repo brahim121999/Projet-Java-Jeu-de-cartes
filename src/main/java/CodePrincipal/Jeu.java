@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import CapaciteSpeciale.Capacite_speciale;
+import enumeration.rarete;
 
 public class Jeu {
 	private int semaine;
@@ -164,6 +165,10 @@ public class Jeu {
 		return liste_joueur.get(id);
 	}
 	
+	public Echange getEchange(Integer id) {
+		return liste_echange.get(id);
+	}
+	
 	public void mettreEnVente(Carte carte) {
 		liste_en_vente.put(carte.getIdCarte(), carte);
 	}
@@ -195,4 +200,18 @@ public class Jeu {
 	void afficherClassementPlayer(int semaine) {
 		//affiche le classement des utilisateurs de la semaine plac�e en param�tre
 	}
+	
+	public void chercherCarteDeJoueurAvendre(int id_joueur, rarete rar) {
+
+        for (Map.Entry mapentry : this.getListeEnVente().entrySet()) {
+
+            Carte c  = (Carte) mapentry.getValue();
+
+            int id1 = c.getIdJoueur();
+
+            if (id_joueur == id1 && c.getRarete() == rar) {
+                c.afficher();
+            }
+        }
+    }
 }

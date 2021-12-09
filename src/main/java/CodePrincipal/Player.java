@@ -160,14 +160,14 @@ public class Player extends Utilisateur{
 	}
 	
 	// on supprime la carte de la liste des cartes a echanger du joueur et de la liste des cartes a echanger du jeu
-	public void supprimeCarteEchange(Integer id_carte) {
-		Carte carte = jeu.getCarte(id_carte);
+	public void supprimeCarteEchange(Integer id_echange) {
+		Echange echange = jeu.getEchange(id_echange);
 		
-		if(!this.echange.contains(id_carte)) {
+		if(!this.echange.contains(id_echange)) {
 			System.out.println("La carte n'est actuellement pas proposé en échange");
 		}
 		else {
-			carte.setDisponibilite(true);
+			echange.carte.setDisponibilite(true);
 			jeu.supprimerDeEchange(id_carte);
 			this.echange.remove(id_carte);
 			System.out.println("Suppression réussie");

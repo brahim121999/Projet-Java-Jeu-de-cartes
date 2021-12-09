@@ -3,11 +3,11 @@ import enumeration.rarete;
 
 public class Echange {
 	private static Integer nb=0;
-	Integer id_echange;
-	Integer proprietaire;
-	Integer carte_a_echange;
-	rarete rarete_attendue;
-	Integer joueur_attendu;
+	private Integer id_echange;
+	private Integer proprietaire;
+	private Integer carte_a_echange;
+	private rarete rarete_attendue;
+	private Integer joueur_attendu;
 	
 	public Echange(Integer proprietaire, Integer carte_a_echange, rarete rarete_attendue, Integer joueur_attendu) {
 		this.id_echange=nb;
