@@ -69,6 +69,14 @@ public class Carte extends CarteInterface{
 	public double calculScore(Classement classement) {
 		return 0;
 	}
+	
+	public void afficher() {
+		System.out.println("=== carte n° : " + id_carte + " ===");
+		System.out.println("id_joueur : " + id_joueur);
+		System.out.println("disponibilité : " + disponibilite);
+		System.out.println("rarete : " + Rarete);
+		System.out.println("id_utilisateur : " + id_utilisateur);
+	}
 }
 
 

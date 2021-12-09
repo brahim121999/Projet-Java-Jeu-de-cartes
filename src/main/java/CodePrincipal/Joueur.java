@@ -7,7 +7,6 @@ public class Joueur {
 	private static int nb = 0;
 	private int id_joueur;
 	private String nom;
-	private String prenom;
 	private boolean poste; 				//0 : gardien, 1 : joueur de champ
 	private List<Integer> liste_equipe;
 	private List<Integer> liste_score;	//Liste des scores du joueur par semaine, de la semaine 0 a la semaine actuelle
@@ -15,7 +14,6 @@ public class Joueur {
 	public Joueur(Jeu jeu, String nom, String prenom, boolean poste, List<Integer> liste_equipe, List<Integer> liste_score) {
 		this.jeu = jeu;
 		this.nom = nom;
-		this.prenom = prenom;
 		this.poste = poste;
 		this.liste_equipe = liste_equipe;
 		this.liste_score = liste_score;
@@ -46,14 +44,6 @@ public class Joueur {
 		this.nom = nom;
 	}
 	
-	public String getPrenom() {
-		return this.prenom;
-	}
-	
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-	
 	public boolean getPoste() {
 		return this.poste;
 	}
@@ -76,5 +66,15 @@ public class Joueur {
 	
 	public void calculScoreHebdo() {
 		// a  completer
+	}
+	
+	public void afficher() {
+		System.out.println("=== joueur n° : " + id_joueur + " ===");
+		System.out.println("nom : " + nom);
+		System.out.println("poste : " + poste);
+		System.out.println("equipe(s) : ");
+		for(Integer e : liste_equipe) {
+			System.out.println(jeu.getEquipe(e).getNom());
+		}
 	}
 }

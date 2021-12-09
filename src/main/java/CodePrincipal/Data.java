@@ -3,7 +3,7 @@ package CodePrincipal;
 public class Data {
 	//represente la performance d'un joueur sur un match donne
 	
-	private String club; // Ã  refaire en changeant le type en Equipe
+	private String club; // a  refaire en changeant le type en Equipe
 	private String nom;
 	private int but;
 	private int passe_decisive;
@@ -71,7 +71,7 @@ public class Data {
 	}
 	
 	public int getDuel_sol() {
-		return this.getDuel_sol();
+		return this.duel_sol;
 	}
 	/*===============================================================================================*/
 	/*===============================================================================================*/

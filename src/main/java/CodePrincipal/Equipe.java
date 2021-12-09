@@ -46,4 +46,13 @@ public class Equipe {
 	public void addPlayer(int id_joueur) {
 		liste_joueur.add(id_joueur);
 	}
+	
+	public void afficher() {
+		System.out.println("=== equipe n° : " + id_equipe + " ===");
+		System.out.println("nom : " + nom);
+		System.out.println("liste_joueur : ");
+		for(Integer j : liste_joueur) {
+			System.out.println(jeu.getJoueur(j).getNom());
+		}
+	}
 }

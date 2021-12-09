@@ -129,6 +129,18 @@ public class Jeu {
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
+	public Carte getCarte(Integer id) {
+		return liste_carte.get(id);
+	}
+	
+	public Equipe getEquipe(Integer id) {
+		return liste_equipe.get(id);
+	}
+	
+	public Joueur getJoueur(Integer id) {
+		return liste_joueur.get(id);
+	}
+	
 	public void mettreEnVente(Carte carte) {
 		liste_en_vente.put(carte.getIdCarte(), carte);
 	}
