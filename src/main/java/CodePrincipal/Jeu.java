@@ -129,6 +129,14 @@ public class Jeu {
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
+	public Capacite_speciale getCapaciteSpecial(Integer id) {
+		return liste_capacite_speciale.get(id);
+	}
+	
+	public Utilisateur getUtilisateur(Integer id) {
+		return liste_utilisateur.get(id);
+	}
+	
 	public Carte getCarte(Integer id) {
 		return liste_carte.get(id);
 	}
