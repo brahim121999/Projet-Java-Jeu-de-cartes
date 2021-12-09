@@ -129,7 +129,7 @@ public class Jeu {
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
-	public Capacite_speciale getCapaciteSpecial(Integer id) {
+	public Capacite_speciale getCapaciteSpeciale(Integer id) {
 		return liste_capacite_speciale.get(id);
 	}
 	
