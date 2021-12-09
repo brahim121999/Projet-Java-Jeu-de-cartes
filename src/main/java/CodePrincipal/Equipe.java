@@ -1,5 +1,6 @@
 package CodePrincipal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Equipe {
@@ -9,10 +10,10 @@ public class Equipe {
 	private String nom;
 	private List<Integer> liste_joueur;
 	
-	public Equipe(Jeu jeu, String nom, List<Integer> liste_joueur) {
+	public Equipe(Jeu jeu, String nom) {
 		this.jeu = jeu;
 		this.nom = nom;
-		this.liste_joueur = liste_joueur;
+		this.liste_joueur = new ArrayList<Integer>();
 		this.id_equipe = nb;
 		Equipe.nb += 1;
 	}

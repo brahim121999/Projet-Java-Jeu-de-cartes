@@ -1,5 +1,6 @@
 package CodePrincipal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Joueur {
@@ -11,12 +12,12 @@ public class Joueur {
 	private List<Integer> liste_equipe;
 	private List<Integer> liste_score;	//Liste des scores du joueur par semaine, de la semaine 0 a la semaine actuelle
 	
-	public Joueur(Jeu jeu, String nom, String prenom, boolean poste, List<Integer> liste_equipe, List<Integer> liste_score) {
+	public Joueur(Jeu jeu, String nom, boolean poste, List<Integer> liste_equipe) {
 		this.jeu = jeu;
 		this.nom = nom;
 		this.poste = poste;
 		this.liste_equipe = liste_equipe;
-		this.liste_score = liste_score;
+		this.liste_score = new ArrayList<Integer>();
 		this.id_joueur = Joueur.nb;
 		Joueur.nb += 1;
 	}

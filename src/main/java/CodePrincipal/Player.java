@@ -105,8 +105,9 @@ public class Player extends Utilisateur{
 	}
 	
 	// on ajoute la carte dans la liste des cartes en vente du joueur et dans la liste des cartes en vente du jeu
-	public void ajoutCarteEnVente(Integer id_carte) {
+	public void ajoutCarteEnVente(Integer id_carte, Integer prix) {
 		Carte carte = jeu.getListeCarte().get(id_carte);
+		carte.setPrix(prix);
 		
 		if(!this.liste_carte.contains(id_carte)) {
 			System.out.println("Vous ne possédez pas la carte");

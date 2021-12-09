@@ -12,6 +12,11 @@ public class Lunatique extends Capacite_speciale{
 		this.description = "Donne un bonus de 2-4-6% les semaines paires et un malus les semaines impaires selon la rareté de la carte";
 	}
 	
+	public Lunatique() {
+		this.nom = "Lunatique";
+		this.description = "Donne un bonus de 2-4-6% les semaines paires et un malus les semaines impaires selon la rareté de la carte";
+	}
+	
 	@Override
 	public double calculScore(Classement classement) {
 		rarete rarete = carte.getRarete();

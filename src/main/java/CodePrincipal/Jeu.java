@@ -128,6 +128,21 @@ public class Jeu {
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/
+
+	public void afficher() {
+		System.out.println("=== jeu ===");
+		System.out.println("nombre d'utilisateur : " + liste_utilisateur.size());
+		System.out.println("nombre d'équipes : " + liste_equipe.size());
+		System.out.println("nombre de joueur : " + liste_joueur.size());
+		System.out.println("nombre de carte : " + liste_carte.size());
+		System.out.println("nombre de carte en vente : " + liste_en_vente.size());
+		System.out.println("nombre de carte en echange : " + liste_carte_echange.size());
+		System.out.println("nombre de carte du système : " + liste_carte_systeme.size());
+		System.out.println("nombre de classement utilisateur : " + liste_classement_utilisateur.size());
+		System.out.println("nombre de classement joueur : " + liste_classement_joueur.size());
+		System.out.println("nombre de dataset : " + liste_dataset.size());
+		System.out.println("nombre de capacite speciale : " + liste_capacite_speciale.size());
+	}
 	
 	public Capacite_speciale getCapaciteSpeciale(Integer id) {
 		return liste_capacite_speciale.get(id);

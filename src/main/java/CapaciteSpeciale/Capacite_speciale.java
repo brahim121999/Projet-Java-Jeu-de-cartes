@@ -15,6 +15,9 @@ public abstract class Capacite_speciale extends CarteInterface{
 		this.carte = carte;
 	}
 	
+	public Capacite_speciale() {
+	}
+	
 	public void ajouterCarte() {
 		carte.ajouterCarte();	
 	}
@@ -23,6 +26,10 @@ public abstract class Capacite_speciale extends CarteInterface{
 	/*===============================================================================================*/
 	public Jeu getJeu() {
 		return carte.getJeu();
+	}
+	
+	public void setCarte(Carte carte) {
+		this.carte = carte;
 	}
 	
 	public Integer getIdCarte() {

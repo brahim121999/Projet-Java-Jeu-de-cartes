@@ -11,8 +11,9 @@ public class Carte extends CarteInterface{
 	private boolean disponibilite;
 	private Integer id_utilisateur;
 	private rarete Rarete;
+	private Integer prix;
 	
-	public Carte(Integer id_joueur, rarete Rarete, Jeu jeu) {
+	public Carte(Integer id_joueur, rarete Rarete, Jeu jeu, Integer prix) {
 		
 		this.id_carte=nb;
 		Carte.nb+=1;
@@ -21,6 +22,7 @@ public class Carte extends CarteInterface{
 		this.Rarete=Rarete;
 		this.jeu=jeu;
 		this.id_utilisateur=0;
+		this.prix=prix;
 	}
 	
 	public void ajouterCarte() {
@@ -59,9 +61,19 @@ public class Carte extends CarteInterface{
 		return this.id_utilisateur;
 	}
 	
+	public Integer getPrix() {
+		return this.prix;
+	}
+	
+	public void setPrix(Integer x) {
+		this.prix=x;
+	}
+	
 	public void setIdUtilisateur(Integer id_utilisateur) {
 		this.id_utilisateur = id_utilisateur;
 	}
+	
+	
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/
