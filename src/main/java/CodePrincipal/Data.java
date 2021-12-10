@@ -3,7 +3,7 @@ package CodePrincipal;
 public class Data {
 	//represente la performance d'un joueur sur un match donne
 	
-	private String club; // a� refaire en changeant le type en Equipe
+	private String club;
 	private String nom;
 	private int but;
 	private int passe_decisive;
@@ -80,11 +80,11 @@ public class Data {
 	public void afficher() {
 		System.out.println("Nom du joueur : " + nom );
 		System.out.println("Club : " + club );
-		System.out.println("Nombre de buts marqués : " + but);
-		System.out.println("Nombre de passes décisives : " + passe_decisive);
+		System.out.println("Nombre de buts marques : " + but);
+		System.out.println("Nombre de passes decisives : " + passe_decisive);
 		System.out.println("Nombre de tacles : " + tacle);
-		System.out.println("Nombre de passes réussies : " + passe_reussie);
-		System.out.println("Nombre de duels gagnés : " + duel_gagne);
+		System.out.println("Nombre de passes reussies : " + passe_reussie);
+		System.out.println("Nombre de duels gagnes : " + duel_gagne);
 		System.out.println("Nombre de duels aeriens : " + duel_aerien);
 		System.out.println("Nombre de duels au sol : " + duel_sol);
 		System.out.println("Nombre de tacles : " + tacle);

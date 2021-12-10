@@ -3,13 +3,15 @@ import enumeration.rarete;
 
 public class Echange {
 	private static Integer nb=0;
+	private Jeu jeu;
 	private Integer id_echange;
 	private Integer proprietaire;
 	private Integer carte_a_echange;
 	private rarete rarete_attendue;
 	private Integer joueur_attendu;
 	
-	public Echange(Integer proprietaire, Integer carte_a_echange, rarete rarete_attendue, Integer joueur_attendu) {
+	public Echange(Jeu jeu, Integer proprietaire, Integer carte_a_echange, rarete rarete_attendue, Integer joueur_attendu) {
+		this.jeu = jeu;
 		this.id_echange=nb;
 		Echange.nb+=1;
 		this.proprietaire = proprietaire;
@@ -43,4 +45,14 @@ public class Echange {
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/
+	
+	public void afficher() {
+		System.out.println("=== echange n° : " + id_echange + " ===");
+		System.out.println("proprietaire : " + proprietaire);
+		System.out.println("carte proposée : ");
+		jeu.getCarte(this.carte_a_echange).afficher();
+		System.out.println("id_joueur attendu : " + joueur_attendu);
+		System.out.println("joueur attendu : " + jeu.getJoueur(joueur_attendu).getNom());
+		System.out.println("rarete : " + rarete_attendue);
+	}
 }

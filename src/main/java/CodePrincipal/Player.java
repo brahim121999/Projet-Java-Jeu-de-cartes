@@ -137,7 +137,7 @@ public class Player extends Utilisateur{
 		}
 		else {
 			carte.setDisponibilite(false);
-			Echange echange = new Echange(id_utilisateur, id_carte, rarete_attendue, joueur_attendu);
+			Echange echange = new Echange(jeu, id_utilisateur, id_carte, rarete_attendue, joueur_attendu);
 			jeu.mettreEnEchange(echange);
 			this.echange.add(echange.getIdEchange());
 			System.out.println("La carte a été proposé en échange avec succès");
@@ -197,33 +197,56 @@ public class Player extends Utilisateur{
 			System.out.println("Vous ne possédez pas la carte que vous souhaitez échanger");
 		}
 		else {
-			// on ajoute sa carte à nos carte
+			// on ajoute sa carte a nos carte
 			autre_carte.setIdUtilisateur(id_utilisateur);
 			liste_carte.add(id_autre_carte);
 			autre_utilisateur.supprimeCarteEchange(id_echange);
 			autre_utilisateur.getListeCarte().remove(id_autre_carte);
 			
-			// on ajoute notre carte à ses carte
+			// on ajoute notre carte a ses carte
 			notre_carte.setIdUtilisateur(id_autre_utilisteur);
 			autre_utilisateur.getListeCarte().add(id_carte);
 			liste_carte.remove(id_carte);
 		}
 	}
 	
+	// pour initier un achat
+	public void acheterCarte(Integer id_carte) {
+
+        Carte carte = jeu.getCarte(id_carte);
+        Integer id_autre_utilisateur = carte.getIdUtilisateur(); // 0 si possédé par le jeu , n'importe quel autre entier sinon
+
+
+        if (this.balance < carte.getPrix()) {
+            System.out.println("Solde insuffisant");
+        }
+
+        else if (id_autre_utilisateur == 0) {
+
+            this.balance -= carte.getPrix();
+            this.liste_carte.add(carte.getIdCarte());
+            carte.setIdUtilisateur(id_utilisateur);
+            this.jeu.getListeEnVente().remove(id_carte);
+            this.jeu.getListeCarte().get(carte.getIdCarte()).setDisponibilite(true);
+            System.out.println("Achat réussi !");
+
+        }
+        else {
+            Player autre_utilisateur = (Player) jeu.getUtilisateur(id_autre_utilisateur);
+            autre_utilisateur.balance += carte.getPrix();
+            this.balance -= carte.getPrix();
+            this.liste_carte.add(id_carte);
+            autre_utilisateur.supprimeCarteEnVente(id_carte);
+            autre_utilisateur.getListeCarte().remove(id_carte);
+            carte.setIdUtilisateur(this.getId());
+            System.out.println("Achat réussi !");
+
+        }
+    }
+	
 	public void calculScoreHebdo() {
 		
 		//a completer
 		
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }

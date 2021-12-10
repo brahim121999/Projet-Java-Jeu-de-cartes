@@ -77,7 +77,7 @@ public class Dataset {
 				But2 = Integer.valueOf(But);
 			} 
 			catch (NumberFormatException e) {
-				  // si le joueur n'a pas marqué aucun but, 0 par defaut
+				  // si le joueur n'a pas marque aucun but, 0 par defaut
 				But2 = (int) 0;
 			}
 			
@@ -87,7 +87,7 @@ public class Dataset {
 				PassD2 = Integer.valueOf(PassD);
 			} 
 			catch (NumberFormatException e) {
-				  // si le joueur n'a pas fait aucune passe décisive, 0 par defaut
+				  // si le joueur n'a pas fait aucune passe decisive, 0 par defaut
 				PassD2 = (int) 0;
 			}
 			
@@ -108,7 +108,7 @@ public class Dataset {
 				 PassR3 = Float.valueOf(PassR2)/100;
 			} 
 			catch (NumberFormatException e) {
-				// si pas de passe réussie, 0 par defaut
+				// si pas de passe reussie, 0 par defaut
 				PassR3 = (float) 0.0;
 			}
 			
@@ -119,7 +119,7 @@ public class Dataset {
 				TotDuelG3 = Integer.valueOf(TotDuelG2);
 			} 
 			catch (NumberFormatException e) {
-				  // si le joueur n'a pas gagné aucun duel, 0 par defaut
+				  // si le joueur n'a pas gagne aucun duel, 0 par defaut
 				TotDuelG3 = (int) 0;
 			}
 			
@@ -152,7 +152,7 @@ public class Dataset {
 				  TempJ3 = Integer.valueOf(TempJ2);
 			} 
 			catch (NumberFormatException e) {
-				  // si le joueur n'a pas joué, 0 par defaut
+				  // si le joueur n'a pas joue, 0 par defaut
 				  TempJ3 = (int) 0;
 			}
 			
@@ -179,7 +179,7 @@ public class Dataset {
 			Map<Integer,Equipe> liste_equipe = new HashMap();
 			liste_equipe= jeu.getListeEquipe();
 			
-			// on cherche l'id du joueur dans l'attribut liste_joeur de liste_equipe du système, pour éviter le cas où 2 joueurs dans le jeu ont le même nom , par contre c'est casi impossible au sein d'une même équipe
+			// on cherche l'id du joueur dans l'attribut liste_joeur de liste_equipe du systeme, pour eviter le cas ou 2 joueurs dans le jeu ont le meme nom , par contre c'est casi impossible au sein d'une meme equipe
 			
 			for (Map.Entry mapentry : liste_equipe.entrySet()) {
 				

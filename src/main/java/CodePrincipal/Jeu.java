@@ -11,10 +11,10 @@ public class Jeu {
 	private Map<Integer, Utilisateur> liste_utilisateur;	//Couple id / objet
 	private Map<Integer, Equipe> liste_equipe;
 	private Map<Integer, Joueur> liste_joueur;
-	private Map<Integer, Carte> liste_carte;			//Liste des cartes implï¿½mentï¿½es dans le jeu
+	private Map<Integer, Carte> liste_carte;			//Liste des cartes implementees dans le jeu
 	private Map<Integer, Carte> liste_en_vente;			//Liste des cartes en ventes
-	private Map<Integer, Echange> liste_echange;	//Liste des cartes proposï¿½es en ï¿½change
-	private Map<Integer, Carte> liste_carte_systeme;	//Liste des cartes n'appartenant ï¿½ aucun joueur
+	private Map<Integer, Echange> liste_echange;	//Liste des cartes proposees en echange
+	private Map<Integer, Carte> liste_carte_systeme;	//Liste des cartes n'appartenant a aucun joueur
 	private Map<Integer, Classement_Player> liste_classement_utilisateur;	
 	private Map<Integer, Classement_Joueur> liste_classement_joueur;
 	private Map<Integer, Dataset> liste_dataset;
@@ -133,7 +133,7 @@ public class Jeu {
 	public void afficher() {
 		System.out.println("=== jeu ===");
 		System.out.println("nombre d'utilisateur : " + liste_utilisateur.size());
-		System.out.println("nombre d'équipes : " + liste_equipe.size());
+		System.out.println("nombre d'equipes : " + liste_equipe.size());
 		System.out.println("nombre de joueur : " + liste_joueur.size());
 		System.out.println("nombre de carte : " + liste_carte.size());
 		System.out.println("nombre de carte en vente : " + liste_en_vente.size());
@@ -190,7 +190,7 @@ public class Jeu {
 	}
 	
 	void afficherClassementJoueur(int semaine) {
-		//affiche le classement des joueurs de la semaine places en parametre
+		//affiche le classement des joueurs de la semaine placee en parametre
 	}
 	
 	void afficherClassementPlayer() {
@@ -198,20 +198,51 @@ public class Jeu {
 	}
 	
 	void afficherClassementPlayer(int semaine) {
-		//affiche le classement des utilisateurs de la semaine placï¿½e en paramï¿½tre
+		//affiche le classement des utilisateurs de la semaine placee en parametre
 	}
 	
+	//chercher carte en vente selon parametre
 	public void chercherCarteDeJoueurAvendre(int id_joueur, rarete rar) {
 
         for (Map.Entry mapentry : this.getListeEnVente().entrySet()) {
 
             Carte c  = (Carte) mapentry.getValue();
-
             int id1 = c.getIdJoueur();
-
             if (id_joueur == id1 && c.getRarete() == rar) {
                 c.afficher();
             }
         }
     }
+	
+	//chercher carte en vente
+	public void afficherCarteAVendre() {
+		for(Map.Entry mapentry : this.getListeEnVente().entrySet()) {
+			Carte c  = (Carte) mapentry.getValue();
+			c.afficher();
+		}
+	}
+	
+	//chercher echange selon parametre
+	public void chercherEchange(int id_joueur, rarete rar) {
+
+        for (Map.Entry mapentry : this.getListeEchange().entrySet()) {
+
+        	Echange e = (Echange) mapentry.getValue();
+        	Carte c = getCarte(e.getCarteAEchange());
+            Integer id_joueur1 = c.getIdJoueur();
+            rarete rarete1 = c.getRarete();
+
+            if (id_joueur == id_joueur1 && rar == rarete1) {
+                e.afficher();
+            }
+        }
+    }
+	
+	//chercher echange
+	public void afficherEchange() {
+		for(Map.Entry mapentry : this.getListeEchange().entrySet()) {
+			Echange e = (Echange) mapentry.getValue();
+			e.afficher();
+		}
+	}
 }

@@ -18,7 +18,8 @@ public class Main {
 		
 		// Creation des comptes
 		Administrateur admin = new Administrateur("matteo", "1234", jeu);
-		Utilisateur player = new Player("brahim", "0000", jeu);
+		Player player = new Player("brahim", "0000", jeu);
+		Player player2 = new Player("picarougne", "0000", jeu);
 		
 		// Ajout des capacites speciales
 		Capacite_speciale lunatique = new Lunatique();
@@ -44,8 +45,24 @@ public class Main {
 			admin.ajouterCarte(i);
 		}
 		
-		// Affichage
 		jeu.afficher();
+        System.out.println(player.getBalance());
+        System.out.println(jeu.getListeCarte().get(2).getPrix());
+        player.acheterCarte(2);
+
+        System.out.println(player.getListeCarte());
+        System.out.println(player.getBalance());
+
+        player2.acheterCarte(550);
+        player2.ajoutCarteEnVente(550, 1000);
+
+        System.out.println(player.getListeCarte());
+        System.out.println(player2.getListeCarte());
+
+        player.acheterCarte(550);
+
+        System.out.println(player.getListeCarte());
+        System.out.println(player2.getListeCarte());
 	}
 
 }
