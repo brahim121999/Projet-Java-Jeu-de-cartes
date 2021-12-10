@@ -181,8 +181,8 @@ public class Jeu {
 		liste_en_vente.remove(id_carte);
 	}
 	
-	public void supprimerDeEchange(int id_carte) {
-		liste_echange.remove(id_carte);
+	public void supprimerDeEchange(int id_echange) {
+		liste_echange.remove(id_echange);
 	}
 	
 	void afficherClassementJoueur() {

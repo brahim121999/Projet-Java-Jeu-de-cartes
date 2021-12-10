@@ -167,10 +167,46 @@ public class Player extends Utilisateur{
 			System.out.println("La carte n'est actuellement pas proposé en échange");
 		}
 		else {
-			echange.carte.setDisponibilite(true);
-			jeu.supprimerDeEchange(id_carte);
-			this.echange.remove(id_carte);
+			jeu.getCarte(echange.getCarteAEchange()).setDisponibilite(true);
+			jeu.supprimerDeEchange(id_echange);
+			this.echange.remove(id_echange);
 			System.out.println("Suppression réussie");
+		}
+	}
+	
+	// pour initier un echange
+	public void echanger(Integer id_echange, Integer id_carte) {
+		
+		Echange echange = jeu.getEchange(id_echange);
+		Carte notre_carte = jeu.getCarte(id_carte);
+		Integer id_autre_carte = echange.getCarteAEchange();
+		Carte autre_carte = jeu.getCarte(id_autre_carte);
+		Integer id_autre_utilisteur = echange.getProprietaire();
+		Player autre_utilisateur = (Player) jeu.getUtilisateur(id_autre_utilisteur);
+		
+		if(notre_carte.getRarete() != echange.getRarete()) {
+			System.out.println("La carte que vous souhaitez échangé n'a pas la bonne rareté");
+		}
+		else if(notre_carte.getIdJoueur() != echange.getJoueurAttendu()) {
+			System.out.println("La carte que vous souhaitez échangé n'est pas du bon joueur");
+		}
+		else if(!jeu.getCarte(id_carte).getDisponibilite()) {
+			System.out.println("La carte que vous souhaitez échangé n'est pas disponible");
+		}
+		else if(notre_carte.getIdUtilisateur() != this.id_utilisateur) {
+			System.out.println("Vous ne possédez pas la carte que vous souhaitez échanger");
+		}
+		else {
+			// on ajoute sa carte à nos carte
+			autre_carte.setIdUtilisateur(id_utilisateur);
+			liste_carte.add(id_autre_carte);
+			autre_utilisateur.supprimeCarteEchange(id_echange);
+			autre_utilisateur.getListeCarte().remove(id_autre_carte);
+			
+			// on ajoute notre carte à ses carte
+			notre_carte.setIdUtilisateur(id_autre_utilisteur);
+			autre_utilisateur.getListeCarte().add(id_carte);
+			liste_carte.remove(id_carte);
 		}
 	}
 	
