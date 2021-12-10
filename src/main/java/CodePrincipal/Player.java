@@ -112,35 +112,35 @@ public class Player extends Utilisateur{
 		carte.setPrix(prix);
 		
 		if(!this.liste_carte.contains(id_carte)) {
-			System.out.println("Vous ne possédez pas la carte");
+			System.out.println("Vous ne possï¿½dez pas la carte");
 		}
 		else if(!carte.getDisponibilite()) {
-			System.out.println("La carte a déjà été mise en vente ou proposé en échange");
+			System.out.println("La carte a dï¿½jï¿½ ï¿½tï¿½ mise en vente ou proposï¿½ en ï¿½change");
 		}
 		else {
 			carte.setDisponibilite(false);
 			jeu.mettreEnVente(carte);
 			this.carte_en_vente.add(id_carte);
-			System.out.println("La carte a été mise en vente avec succès");
+			System.out.println("La carte a ï¿½tï¿½ mise en vente avec succï¿½s");
 		}
 	}
 	
-	// on ajoute la carte dans la liste des cartes a echanger du joueur et dans la liste des cartes a echanger du jeu
+	// on ajoute la carte dans la liste des cartes a echanger du joueur et dans la liste des cartes aï¿½echanger du jeu
 	public void ajoutCarteEchange(Integer id_carte, rarete rarete_attendue, Integer joueur_attendu) {
 		Carte carte = jeu.getCarte(id_carte);
 		
 		if(!this.liste_carte.contains(id_carte)) {
-			System.out.println("Vous ne possédez pas la carte");
+			System.out.println("Vous ne possï¿½dez pas la carte");
 		}
 		else if(!carte.getDisponibilite()) {
-			System.out.println("La carte a déjà été mise en vente ou proposé en échange");
+			System.out.println("La carte a dï¿½jï¿½ ï¿½tï¿½ mise en vente ou proposï¿½ en ï¿½change");
 		}
 		else {
 			carte.setDisponibilite(false);
 			Echange echange = new Echange(id_utilisateur, id_carte, rarete_attendue, joueur_attendu);
 			jeu.mettreEnEchange(echange);
 			this.echange.add(echange.getIdEchange());
-			System.out.println("La carte a été proposé en échange avec succès");
+			System.out.println("La carte a ï¿½tï¿½ proposï¿½ en ï¿½change avec succï¿½s");
 		}
 	}
 	
@@ -155,7 +155,7 @@ public class Player extends Utilisateur{
 			carte.setDisponibilite(true);
 			jeu.supprimerDeLaVente(id_carte);
 			this.carte_en_vente.remove(id_carte);
-			System.out.println("Suppression réussie");
+			System.out.println("Suppression rï¿½ussie");
 		}
 	}
 	
@@ -164,14 +164,50 @@ public class Player extends Utilisateur{
 		Echange echange = jeu.getEchange(id_echange);
 		
 		if(!this.echange.contains(id_echange)) {
-			System.out.println("La carte n'est actuellement pas proposé en échange");
+			System.out.println("La carte n'est actuellement pas proposï¿½ en ï¿½change");
 		}
 		else {
 			echange.carte.setDisponibilite(true);
 			jeu.supprimerDeEchange(id_carte);
 			this.echange.remove(id_carte);
-			System.out.println("Suppression réussie");
+			System.out.println("Suppression rï¿½ussie");
 		}
+	}
+	
+	
+	
+	public void acheterCarte(Integer prix_propose, int id_joueur, rarete rar) {
+		
+		this.jeu.chercherCarteDeJoueurAvendre(id_joueur, rar);
+		
+		for (Map.Entry mapentry : jeu.getListeEnVente().entrySet()) {
+			
+			Carte c = (Carte) mapentry.getValue();
+			
+			// carte appratenante au systÃ¨me
+			if (c.getIdUtilisateur()== 0 && id_joueur == c.getIdJoueur() && c.getPrix() <= prix_propose) {
+				
+				this.balance =- prix_propose;
+				this.liste_carte.add(c.getIdCarte());
+				this.jeu.getListeEnVente().remove(c.getIdCarte());
+				this.jeu.getListeCarte().get(c.getIdCarte()).setDisponibilite(false);
+				
+			}
+			
+			// carte appartenante Ã  un autre joueur
+			else if(id_joueur == c.getIdJoueur() && c.getPrix() <= prix_propose) {
+				
+				this.balance =- prix_propose;
+				this.liste_carte.add(c.getIdCarte());
+				Player vendeur = (Player)this.jeu.getListeUtilisateur().get(c.getIdUtilisateur());
+				vendeur.supprimeCarteEnVente(c.getIdCarte());	
+			}
+			
+			else {
+				System.out.println("Soit votre solde est insuffisant , soit le joueur recherchÃ© n'est pas Ã  vendre");
+			}
+		}
+		
 	}
 	
 	public void calculScoreHebdo() {
