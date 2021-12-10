@@ -6,7 +6,7 @@ import enumeration.rarete;
 
 public class Player extends Utilisateur{
 	
-	private double balance;
+	private Integer balance;
 	private ArrayList<Integer> liste_carte;
 	private ArrayList<Integer> carte_semaine_suivante;
 	public ArrayList<Integer> carte_en_vente;
@@ -92,12 +92,12 @@ public class Player extends Utilisateur{
 	/*===============================================================================================*/
 	
 	// deposer de l'argent
-	public void augmenterBalance(double m) {
+	public void augmenterBalance(Integer m) {
 		this.balance += m;
 	}
 	
 	// retirer de l'argent
-	public void diminuerBalance(double m) {
+	public void diminuerBalance(Integer m) {
 		this.balance -= m  ;
 	}
 	
@@ -112,35 +112,35 @@ public class Player extends Utilisateur{
 		carte.setPrix(prix);
 		
 		if(!this.liste_carte.contains(id_carte)) {
-			System.out.println("Vous ne possédez pas la carte");
+			System.out.println("Vous ne possï¿½dez pas la carte");
 		}
 		else if(!carte.getDisponibilite()) {
-			System.out.println("La carte a déjà été mise en vente ou proposé en échange");
+			System.out.println("La carte a dï¿½jï¿½ ï¿½tï¿½ mise en vente ou proposï¿½ en ï¿½change");
 		}
 		else {
 			carte.setDisponibilite(false);
 			jeu.mettreEnVente(carte);
 			this.carte_en_vente.add(id_carte);
-			System.out.println("La carte a été mise en vente avec succès");
+			System.out.println("La carte a ï¿½tï¿½ mise en vente avec succï¿½s");
 		}
 	}
 	
-	// on ajoute la carte dans la liste des cartes a echanger du joueur et dans la liste des cartes a echanger du jeu
+	// on ajoute la carte dans la liste des cartes a echanger du joueur et dans la liste des cartes aï¿½echanger du jeu
 	public void ajoutCarteEchange(Integer id_carte, rarete rarete_attendue, Integer joueur_attendu) {
 		Carte carte = jeu.getCarte(id_carte);
 		
 		if(!this.liste_carte.contains(id_carte)) {
-			System.out.println("Vous ne possédez pas la carte");
+			System.out.println("Vous ne possï¿½dez pas la carte");
 		}
 		else if(!carte.getDisponibilite()) {
-			System.out.println("La carte a déjà été mise en vente ou proposé en échange");
+			System.out.println("La carte a dï¿½jï¿½ ï¿½tï¿½ mise en vente ou proposï¿½ en ï¿½change");
 		}
 		else {
 			carte.setDisponibilite(false);
 			Echange echange = new Echange(id_utilisateur, id_carte, rarete_attendue, joueur_attendu);
 			jeu.mettreEnEchange(echange);
 			this.echange.add(echange.getIdEchange());
-			System.out.println("La carte a été proposé en échange avec succès");
+			System.out.println("La carte a ï¿½tï¿½ proposï¿½ en ï¿½change avec succï¿½s");
 		}
 	}
 	
@@ -155,7 +155,7 @@ public class Player extends Utilisateur{
 			carte.setDisponibilite(true);
 			jeu.supprimerDeLaVente(id_carte);
 			this.carte_en_vente.remove(id_carte);
-			System.out.println("Suppression réussie");
+			System.out.println("Suppression rï¿½ussie");
 		}
 	}
 	
@@ -164,13 +164,13 @@ public class Player extends Utilisateur{
 		Echange echange = jeu.getEchange(id_echange);
 		
 		if(!this.echange.contains(id_echange)) {
-			System.out.println("La carte n'est actuellement pas proposé en échange");
+			System.out.println("La carte n'est actuellement pas proposï¿½ en ï¿½change");
 		}
 		else {
 			jeu.getCarte(echange.getCarteAEchange()).setDisponibilite(true);
 			jeu.supprimerDeEchange(id_echange);
 			this.echange.remove(id_echange);
-			System.out.println("Suppression réussie");
+			System.out.println("Suppression rï¿½ussie");
 		}
 	}
 	
@@ -185,28 +185,59 @@ public class Player extends Utilisateur{
 		Player autre_utilisateur = (Player) jeu.getUtilisateur(id_autre_utilisteur);
 		
 		if(notre_carte.getRarete() != echange.getRarete()) {
-			System.out.println("La carte que vous souhaitez échangé n'a pas la bonne rareté");
+			System.out.println("La carte que vous souhaitez ï¿½changï¿½ n'a pas la bonne raretï¿½");
 		}
 		else if(notre_carte.getIdJoueur() != echange.getJoueurAttendu()) {
-			System.out.println("La carte que vous souhaitez échangé n'est pas du bon joueur");
+			System.out.println("La carte que vous souhaitez ï¿½changï¿½ n'est pas du bon joueur");
 		}
 		else if(!jeu.getCarte(id_carte).getDisponibilite()) {
-			System.out.println("La carte que vous souhaitez échangé n'est pas disponible");
+			System.out.println("La carte que vous souhaitez ï¿½changï¿½ n'est pas disponible");
 		}
 		else if(notre_carte.getIdUtilisateur() != this.id_utilisateur) {
-			System.out.println("Vous ne possédez pas la carte que vous souhaitez échanger");
+			System.out.println("Vous ne possï¿½dez pas la carte que vous souhaitez ï¿½changer");
 		}
 		else {
-			// on ajoute sa carte à nos carte
+			// on ajoute sa carte ï¿½ nos carte
 			autre_carte.setIdUtilisateur(id_utilisateur);
 			liste_carte.add(id_autre_carte);
 			autre_utilisateur.supprimeCarteEchange(id_echange);
 			autre_utilisateur.getListeCarte().remove(id_autre_carte);
 			
-			// on ajoute notre carte à ses carte
+			// on ajoute notre carte ï¿½ ses carte
 			notre_carte.setIdUtilisateur(id_autre_utilisteur);
 			autre_utilisateur.getListeCarte().add(id_carte);
 			liste_carte.remove(id_carte);
+		}
+	}
+	
+	public void acheterCarte(int id_carte) {
+		
+		Carte carte = jeu.getCarte(id_carte);
+		Integer id_autre_utilisateur = carte.getIdUtilisateur(); // 0 si possÃ©dÃ© par le jeu , n'importe quel autre entier sinon
+		
+		
+		if (this.balance < carte.getPrix()) {
+			System.out.println("Solde insuffisant");
+		}
+		
+		else if (id_autre_utilisateur == 0) {
+			
+			this.balance =- carte.getPrix();
+			this.liste_carte.add(carte.getIdCarte());
+			this.jeu.getListeEnVente().remove(carte.getIdCarte());
+			this.jeu.getListeCarte().get(carte.getIdCarte()).setDisponibilite(false);
+			System.out.println("Achat rÃ©ussi !");
+			
+		}
+		else if(id_autre_utilisateur != 0) {
+			Player autre_utilisateur = (Player) jeu.getUtilisateur(id_autre_utilisateur);
+			autre_utilisateur.balance += carte.getPrix();
+			this.balance =- carte.getPrix();
+			this.liste_carte.add(carte.getIdCarte());
+			autre_utilisateur.supprimeCarteEnVente(carte.getIdCarte());	
+			carte.setIdUtilisateur(this.getId());
+			System.out.println("Achat rÃ©ussi !");
+			
 		}
 	}
 	
