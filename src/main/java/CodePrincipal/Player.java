@@ -234,7 +234,8 @@ public class Player extends Utilisateur{
 			autre_utilisateur.balance += carte.getPrix();
 			this.balance =- carte.getPrix();
 			this.liste_carte.add(carte.getIdCarte());
-			autre_utilisateur.supprimeCarteEnVente(carte.getIdCarte());	
+			autre_utilisateur.supprimeCarteEnVente(carte.getIdCarte());
+			autre_utilisateur.getListeCarte().remove(carte.getIdCarte());
 			carte.setIdUtilisateur(this.getId());
 			System.out.println("Achat réussi !");
 			
