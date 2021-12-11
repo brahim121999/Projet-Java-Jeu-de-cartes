@@ -28,7 +28,7 @@ public class Dataset {
 		this.id_dataset = nb;
 		Dataset.nb += 1;
 		this.semaine = semaine;
-		this.RESOURCES_PATH = path;
+		this.RESOURCES_PATH = "../../../../Data";
 		this.FILE_NAME = file;
 		this.jeu = jeu;
 		this.dataset = new HashMap<Integer, Data>();
