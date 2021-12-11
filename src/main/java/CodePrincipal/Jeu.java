@@ -7,17 +7,15 @@ import CapaciteSpeciale.Capacite_speciale;
 import enumeration.rarete;
 
 public class Jeu {
-	private int semaine;
+	private Integer semaine;
 	private Map<Integer, Utilisateur> liste_utilisateur;	//Couple id / objet
 	private Map<Integer, Equipe> liste_equipe;
 	private Map<Integer, Joueur> liste_joueur;
 	private Map<Integer, Carte> liste_carte;			//Liste des cartes implementees dans le jeu
 	private Map<Integer, Carte> liste_en_vente;			//Liste des cartes en ventes
-	private Map<Integer, Echange> liste_echange;	//Liste des cartes proposees en echange
+	private Map<Integer, Echange> liste_echange;		//Liste des cartes proposees en echange
 	private Map<Integer, Carte> liste_carte_systeme;	//Liste des cartes n'appartenant a aucun joueur
-	private Map<Integer, Classement_Player> liste_classement_utilisateur;	
-	private Map<Integer, Classement_Joueur> liste_classement_joueur;
-	private Map<Integer, Dataset> liste_dataset;
+	private Map<Integer, Dataset> liste_dataset;		//Liste des dataset de la semaine courante
 	private Map<Integer, Capacite_speciale> liste_capacite_speciale;
 	private static Jeu uniqueInstance = new Jeu();
 	
@@ -30,8 +28,6 @@ public class Jeu {
 		this.liste_en_vente = new HashMap<Integer, Carte>();
 		this.liste_echange = new HashMap<Integer, Echange>();
 		this.liste_carte_systeme = new HashMap<Integer, Carte>();
-		this.liste_classement_utilisateur = new HashMap<Integer, Classement_Player>();
-		this.liste_classement_joueur = new HashMap<Integer, Classement_Joueur>();
 		this.liste_dataset = new HashMap<Integer, Dataset>();
 		this.liste_capacite_speciale = new HashMap<Integer, Capacite_speciale>();
 	}
@@ -43,11 +39,11 @@ public class Jeu {
 	/*===============================================================================================*/
 	/*======================================= GETTER / SETTER =======================================*/
 	/*===============================================================================================*/
-	public int getSemaine() {
+	public Integer getSemaine() {
 		return this.semaine;
 	}
 	
-	public void setSemaine(int semaine) {
+	public void setSemaine(Integer semaine) {
 		this.semaine = semaine;
 	}
 	
@@ -107,14 +103,6 @@ public class Jeu {
 		this.liste_carte_systeme = liste_carte_systeme;
 	}
 	
-	public Map<Integer, Classement_Player> getListeClassementUtilisateur() {
-		return this.liste_classement_utilisateur;
-	}
-	
-	public Map<Integer, Classement_Joueur> getListeClassementJoueur() {
-		return this.liste_classement_joueur;
-	}
-	
 	public Map<Integer, Dataset> getListeDataset() {
 		return this.liste_dataset;
 	}
@@ -138,9 +126,7 @@ public class Jeu {
 		System.out.println("nombre de carte : " + liste_carte.size());
 		System.out.println("nombre de carte en vente : " + liste_en_vente.size());
 		System.out.println("nombre de d'echange : " + liste_echange.size());
-		System.out.println("nombre de carte du syst�me : " + liste_carte_systeme.size());
-		System.out.println("nombre de classement utilisateur : " + liste_classement_utilisateur.size());
-		System.out.println("nombre de classement joueur : " + liste_classement_joueur.size());
+		System.out.println("nombre de carte du systeme : " + liste_carte_systeme.size());
 		System.out.println("nombre de dataset : " + liste_dataset.size());
 		System.out.println("nombre de capacite speciale : " + liste_capacite_speciale.size());
 	}
@@ -201,30 +187,35 @@ public class Jeu {
 		//affiche le classement des utilisateurs de la semaine placee en parametre
 	}
 	
-	//chercher carte en vente selon parametre
+	@SuppressWarnings("rawtypes")
 	public void chercherCarteDeJoueurAvendre(int id_joueur, rarete rar) {
-
+		//chercher carte en vente selon parametre
         for (Map.Entry mapentry : this.getListeEnVente().entrySet()) {
 
             Carte c  = (Carte) mapentry.getValue();
             int id1 = c.getIdJoueur();
+            
             if (id_joueur == id1 && c.getRarete() == rar) {
                 c.afficher();
             }
         }
     }
 	
-	//chercher carte en vente
+	
+	@SuppressWarnings("rawtypes")
 	public void afficherCarteAVendre() {
+		//chercher carte en vente
 		for(Map.Entry mapentry : this.getListeEnVente().entrySet()) {
+			
 			Carte c  = (Carte) mapentry.getValue();
 			c.afficher();
 		}
 	}
 	
-	//chercher echange selon parametre
+	
+	@SuppressWarnings("rawtypes")
 	public void chercherEchange(int id_joueur, rarete rar) {
-
+		//chercher echange selon parametre
         for (Map.Entry mapentry : this.getListeEchange().entrySet()) {
 
         	Echange e = (Echange) mapentry.getValue();
@@ -238,12 +229,11 @@ public class Jeu {
         }
     }
 	
-	//chercher echange
+	
+	@SuppressWarnings("rawtypes")
 	public void afficherEchange() {
-		
-		System.out.println("hi");
+		//chercher echange
 		for(Map.Entry mapentry : this.getListeEchange().entrySet()) {
-			
 			
 			Echange e = (Echange) mapentry.getValue();
 			e.afficher();

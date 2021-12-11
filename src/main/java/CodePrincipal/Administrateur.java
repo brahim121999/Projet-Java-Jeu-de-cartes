@@ -1,4 +1,6 @@
 package CodePrincipal;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import CapaciteSpeciale.Capacite_speciale;
@@ -118,4 +120,28 @@ public class Administrateur extends Utilisateur {
 		Equipe equipe = new Equipe(jeu, nom);
 		jeu.getListeEquipe().put(equipe.getId_equipe(), equipe);
 	}
+	
+	public void ReadAllFilesInFolder(File folder) throws IOException {
+		for (File file : folder.listFiles()) {
+			if (!file.isDirectory()) {
+				Dataset data = new Dataset(this.jeu.getSemaine(), folder.getPath(),"\\"+file.getName(), this.jeu);
+				data.afficher();
+				this.jeu.getListeDataset().put(data.getId_dataset(), data); 
+			} else {
+				ReadAllFilesInFolder(file);
+			}
+		}
+	}
+	
+	
+	public void miseAjourHebdo() throws IOException {
+		
+		this.jeu.setSemaine(jeu.getSemaine()+1);
+		
+		File folder = new File("C:\\Users\\matte\\Desktop\\2021-boursault-braham-java\\Données-20211128\\");
+		ReadAllFilesInFolder(folder);
+		
+	
+	}
+	
 }

@@ -2,7 +2,7 @@ package CodePrincipal;
 import enumeration.rarete;
 
 public class Echange {
-	private static Integer nb=0;
+	private static int nb=0;
 	private Jeu jeu;
 	private Integer id_echange;
 	private Integer proprietaire;

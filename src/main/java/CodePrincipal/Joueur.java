@@ -1,23 +1,23 @@
 package CodePrincipal;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Joueur {
 	private Jeu jeu;
 	private static int nb = 0;
-	private int id_joueur;
+	private Integer id_joueur;
 	private String nom;
 	private boolean poste; 				//0 : gardien, 1 : joueur de champ
 	private List<Integer> liste_equipe;
-	private List<Integer> liste_score;	//Liste des scores du joueur par semaine, de la semaine 0 a la semaine actuelle
+	private Data performance;			// Performance du joueur pour la semaine actuelle
 	
 	public Joueur(Jeu jeu, String nom, boolean poste, List<Integer> liste_equipe) {
 		this.jeu = jeu;
 		this.nom = nom;
 		this.poste = poste;
 		this.liste_equipe = liste_equipe;
-		this.liste_score = new ArrayList<Integer>();
+		this.performance = new Data();
 		this.id_joueur = Joueur.nb;
 		Joueur.nb += 1;
 	}
@@ -33,7 +33,7 @@ public class Joueur {
 		return nb;
 	}
 	
-	public int getId_joueur() {
+	public Integer getId_joueur() {
 		return this.id_joueur;
 	}
 	
@@ -57,16 +57,31 @@ public class Joueur {
 		return this.liste_equipe;
 	}
 	
-	public List<Integer> getListeScore() {
-		return this.liste_score;
+	public Data getPerformance() {
+		return this.performance;
 	}
 	
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
+	@SuppressWarnings("rawtypes")
 	public void calculScoreHebdo() {
-		// a  completer
+		this.performance = new Data();
+		int cpt = 0;
+		
+		for(Map.Entry mapentry : jeu.getListeDataset().entrySet()) {
+			Dataset dataset = (Dataset) mapentry.getValue();
+			
+			for(Map.Entry mapentry2 : dataset.getDataset().entrySet()) {
+				
+				if(this.id_joueur == mapentry2.getKey()) {
+					this.performance.addData((Data) mapentry2.getValue());
+					cpt += 1;
+				}
+			}
+		}
+		this.performance.meanData(cpt);
 	}
 	
 	public void afficher() {

@@ -1,7 +1,6 @@
 package CapaciteSpeciale;
 
 import CodePrincipal.Carte;
-import CodePrincipal.Classement;
 import enumeration.rarete;
 
 public class Force extends Capacite_speciale{
@@ -18,12 +17,12 @@ public class Force extends Capacite_speciale{
 	}
 	
 	@Override
-	public double calculScore(Classement classement) {
+	public float calculScore() {
 		rarete rarete = carte.getRarete();
 		switch(rarete) {
-			case commune: return carte.calculScore(classement) + 5;
-			case peu_commune: return carte.calculScore(classement) + 10;
-			case rare: return carte.calculScore(classement) + 20;
+			case commune: return carte.calculScore() + 5;
+			case peu_commune: return carte.calculScore() + 10;
+			case rare: return carte.calculScore() + 20;
 		}
 		return 0; // on ne rentre jamais dans ce cas là
 	}

@@ -105,8 +105,13 @@ public class Main {
 		admin.ajouterJoueur(jeu, "Kalifa Coulibaly", true, liste_equipe2);
 		admin.ajouterJoueur(jeu, "Samuel Moutoussamy", true, liste_equipe2);
 		
-        Dataset data = new Dataset(42, "/home/bob/Bureau/Projet/2021-boursault-braham-java/DonnÃ©es-20211128/2021_42/", "2021_42_Nantes.csv", jeu);
-        data.afficher();
+        //Dataset data = new Dataset(42, "C:\\Users\\matte\\Desktop\\2021-boursault-braham-java\\Données-20211128\\0", "\\0_Nantes.csv", jeu);
+        //data.afficher();
+        
+		
+		
+		// ajouter les joueurs des autres csv
+        admin.miseAjourHebdo();
 	}
 
 }

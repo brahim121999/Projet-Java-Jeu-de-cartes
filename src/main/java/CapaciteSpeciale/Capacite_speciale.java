@@ -2,7 +2,6 @@ package CapaciteSpeciale;
 
 import CodePrincipal.Carte;
 import CodePrincipal.CarteInterface;
-import CodePrincipal.Classement;
 import CodePrincipal.Jeu;
 import enumeration.rarete;
 
@@ -63,5 +62,5 @@ public abstract class Capacite_speciale extends CarteInterface{
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
-	public abstract double calculScore(Classement classement);
+	public abstract float calculScore();
 }

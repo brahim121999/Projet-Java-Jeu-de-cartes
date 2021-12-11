@@ -4,7 +4,7 @@ import enumeration.rarete;
 
 public abstract class CarteInterface {
 	
-	public abstract double calculScore(Classement classement);
+	public abstract float calculScore();
 	
 	public abstract void ajouterCarte();
 	

@@ -4,13 +4,13 @@ import enumeration.rarete;
 
 public class Carte extends CarteInterface{
 	
-	private static Integer nb=0;
+	private static int nb=0;
 	private Integer id_carte;
 	private Jeu jeu;
 	private Integer id_joueur;
 	private boolean disponibilite;
 	private Integer id_utilisateur;
-	private rarete Rarete;
+	private rarete rarete;
 	private Integer prix;
 	
 	public Carte(Integer id_joueur, rarete Rarete, Jeu jeu, Integer prix) {
@@ -19,7 +19,7 @@ public class Carte extends CarteInterface{
 		Carte.nb+=1;
 		this.disponibilite=true;
 		this.id_joueur=id_joueur;
-		this.Rarete=Rarete;
+		this.rarete=Rarete;
 		this.jeu=jeu;
 		this.id_utilisateur=0;
 		this.prix=prix;
@@ -54,7 +54,7 @@ public class Carte extends CarteInterface{
 	}
 	
 	public rarete getRarete() {
-		return this.Rarete;
+		return this.rarete;
 	}
 	
 	public Integer getIdUtilisateur() {
@@ -76,8 +76,8 @@ public class Carte extends CarteInterface{
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	
-	public double calculScore(Classement classement) {
-		return 0;
+	public float calculScore() {
+		return jeu.getJoueur(this.id_joueur).getPerformance().getNote();
 	}
 	
 	public void afficher() {
@@ -85,7 +85,7 @@ public class Carte extends CarteInterface{
 		System.out.println("id_joueur : " + id_joueur);
 		System.out.println("joueur : " + jeu.getJoueur(id_joueur).getNom());
 		System.out.println("prix : "+ prix);
-		System.out.println("rarete : " + Rarete);
+		System.out.println("rarete : " + rarete);
 		System.out.println("id_utilisateur : " + id_utilisateur);
 	}
 }

@@ -13,7 +13,9 @@ import au.com.bytecode.opencsv.CSVReader;
 public class Dataset {
 	//represente toutes les donnees sur les joueurs pour une semaine
 	
-	private int semaine;
+	private static int nb = 0;
+	private Integer id_dataset;
+	private Integer semaine;
 	private Map<Integer, Data> dataset; //couple id_joueur / Data
 	private String RESOURCES_PATH ;
 	private String FILE_NAME;
@@ -21,7 +23,10 @@ public class Dataset {
 	private Jeu jeu;
 	
 	
-	public Dataset(int semaine,String path,String file,Jeu jeu) throws IOException {
+	@SuppressWarnings({ "rawtypes", "static-access", "resource" })
+	public Dataset(Integer semaine,String path,String file,Jeu jeu) throws IOException {
+		this.id_dataset = nb;
+		Dataset.nb += 1;
 		this.semaine = semaine;
 		this.RESOURCES_PATH = path;
 		this.FILE_NAME = file;
@@ -33,7 +38,6 @@ public class Dataset {
 	    try {
 	            final File fichier = new File(this.RESOURCES_PATH + this.FILE_NAME);
 	            final FileReader fr = new FileReader(fichier);
-
 	            final CSVReader csvReader = new CSVReader(fr, this.SEPARATOR);
 
 	            String[] nextLine = null;
@@ -98,7 +102,7 @@ public class Dataset {
 				tacle2 = 0;
 			}
 			
-			double PassR5;
+			float PassR5;
 			try {
 				String PassR = info[5];
 				String PassR2[] = PassR.split(" ");
@@ -110,11 +114,11 @@ public class Dataset {
 				} 
 				catch (NumberFormatException e) {
 					// si pas de passe reussie, 0 par defaut
-					PassR5 = 0.0;
+					PassR5 = 0;
 				}
 			}
 			catch (ArrayIndexOutOfBoundsException e) {
-				PassR5 =  0.0;
+				PassR5 =  0;
 			}
 			
 			String TotDuelG = info[6];
@@ -168,13 +172,13 @@ public class Dataset {
 			String Poste = info[10];
 			String Note = info[11];
 			
-			double note2;
+			float note2;
 			try {
 				 note2 = Float.valueOf(Note);
 			} 
 			catch (NumberFormatException e) {
 				// si pas de note 0 par defaut
-				note2 = 0.0;
+				note2 = 0;
 			}
 			
 			Data Donnees = new Data(equipe,nom,But2,PassD2,tacle2,PassR5,TotDuelG4,DA4,DauS4,TempJ4,Poste,note2);
@@ -182,7 +186,7 @@ public class Dataset {
 			
 			Map<Integer,Equipe> liste_equipe = jeu.getListeEquipe();
 			
-			// on cherche l'id du joueur dans l'attribut liste_joeur de liste_equipe du systeme, pour eviter le cas ou 2 joueurs dans le jeu ont le meme nom , par contre c'est casi impossible au sein d'une meme equipe
+			// on cherche l'id du joueur dans l'attribut liste_joueur de liste_equipe du systeme, pour eviter le cas ou 2 joueurs dans le jeu ont le meme nom, par contre c'est casi impossible au sein d'une meme equipe
 			
 			for (Map.Entry mapentry : liste_equipe.entrySet()) {
 				
@@ -197,8 +201,8 @@ public class Dataset {
 							id = joueur.getId_joueur();
 							break;
 						}
-					};
-				};
+					}
+				}
 			}
 			this.dataset.put(id, Donnees);
 		}
@@ -207,6 +211,10 @@ public class Dataset {
 	/*===============================================================================================*/
 	/*======================================= GETTER / SETTER =======================================*/
 	/*===============================================================================================*/
+	
+	public int getId_dataset() {
+		return this.id_dataset;
+	}
 	
 	public int getSemaine() {
 		return this.semaine;
@@ -224,9 +232,10 @@ public class Dataset {
 		return this.dataset;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void afficher() {
 		for(Map.Entry mapentry : dataset.entrySet()) {
-			System.out.println("=== Joueur nÂ° " + mapentry.getKey() + " ===");
+			System.out.println("=== Joueur n° " + mapentry.getKey() + " ===");
 			Data d = (Data) mapentry.getValue();
 			d.afficher();
 		}

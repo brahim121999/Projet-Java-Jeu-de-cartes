@@ -5,18 +5,18 @@ public class Data {
 	
 	private String club;
 	private String nom;
-	private int but;
-	private int passe_decisive;
-	private int tacle;
-	private double passe_reussie;	//en pourcentage
-	private int duel_gagne;
-	private int duel_aerien;
-	private int duel_sol ;
-	private int temps_de_jeu;		//en minute
+	private float but;
+	private float passe_decisive;
+	private float tacle;
+	private float passe_reussie;	//en pourcentage
+	private float duel_gagne;
+	private float duel_aerien;
+	private float duel_sol ;
+	private float temps_de_jeu;		//en minute
 	private String poste;
-	private double note;
+	private float note;
 	
-	public Data(String club, String nom,int but, int passe_decisive, int tacle, double passe_reussie, int duel_gagne, int duel_aerien, int duel_sol ,int temps_de_jeu, String poste, double note) {
+	public Data(String club, String nom,int but, int passe_decisive, int tacle, float passe_reussie, int duel_gagne, int duel_aerien, int duel_sol ,int temps_de_jeu, String poste, float note) {
 		this.club = club;
 		this.nom = nom;
 		this.but = but;
@@ -25,40 +25,56 @@ public class Data {
 		this.passe_reussie = passe_reussie;
 		this.duel_gagne = duel_gagne;
 		this.duel_aerien = duel_aerien;
+		this.duel_sol = duel_sol;
 		this.temps_de_jeu = temps_de_jeu;
 		this.poste = poste;
 		this.note = note;
-		this.duel_sol = duel_sol;
+	}
+	
+	public Data() {
+		//pour les joueurs n'ayant joué aucun match de la semaine
+		this.club = "";
+		this.nom = "";
+		this.but = 0;
+		this.passe_decisive = 0;
+		this.tacle = 0;
+		this.passe_reussie = 0;
+		this.duel_gagne = 0;
+		this.duel_aerien = 0;
+		this.duel_sol = 0;
+		this.temps_de_jeu = 0;
+		this.poste = "";
+		this.note = 0;
 	}
 	
 	/*===============================================================================================*/
 	/*======================================= GETTER / SETTER =======================================*/
 	/*===============================================================================================*/
-	public int getBut() {
+	public float getBut() {
 		return this.but;
 	}
 	
-	public int getPasse_decisive() {
+	public float getPasse_decisive() {
 		return this.passe_decisive;
 	}
 	
-	public int getTacle() {
+	public float getTacle() {
 		return this.tacle;
 	}
 	
-	public double getPasse_reussie() {
+	public float getPasse_reussie() {
 		return this.passe_reussie;
 	}
 	
-	public int getDuel_gagne() {
+	public float getDuel_gagne() {
 		return this.duel_gagne;
 	}
 	
-	public int getDuel_aerien() {
+	public float getDuel_aerien() {
 		return this.duel_aerien;
 	}
 	
-	public int getTemps_de_jeu() {
+	public float getTemps_de_jeu() {
 		return this.temps_de_jeu;
 	}
 	
@@ -66,11 +82,15 @@ public class Data {
 		return this.poste;
 	}
 	
-	public double getNote() {
+	public float getNote() {
 		return this.note;
 	}
 	
-	public int getDuel_sol() {
+	public float getDuel_sol() {
+		return this.duel_sol;
+	}
+	
+	public float getNb_data() {
 		return this.duel_sol;
 	}
 	/*===============================================================================================*/
@@ -91,6 +111,32 @@ public class Data {
 		System.out.println("Temps de jeu : " + temps_de_jeu);
 		System.out.println("Poste : " + poste);
 		System.out.println("Note : " + note);
-		
+	}
+	
+	public void addData(Data data) {
+		this.club = "";
+		this.nom = "";
+		this.but += data.getBut();
+		this.passe_decisive += data.getPasse_decisive();
+		this.tacle += data.getTacle();
+		this.passe_reussie += data.getPasse_reussie();
+		this.duel_gagne += data.getDuel_gagne();
+		this.duel_aerien += data.getDuel_gagne();
+		this.duel_sol += data.getDuel_sol();
+		this.temps_de_jeu += data.getTemps_de_jeu();
+		this.poste = "";
+		this.note += data.getNote();
+	}
+	
+	public void meanData(int nb) {
+		this.but /= nb;
+		this.passe_decisive /= nb;
+		this.tacle /= nb;
+		this.passe_reussie /= nb;
+		this.duel_gagne /= nb;
+		this.duel_aerien /= nb;
+		this.duel_sol /= nb;
+		this.temps_de_jeu /= nb;
+		this.note /= nb;
 	}
 }
