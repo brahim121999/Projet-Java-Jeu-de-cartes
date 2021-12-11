@@ -92,7 +92,5 @@ public class Data {
 		System.out.println("Poste : " + poste);
 		System.out.println("Note : " + note);
 		
-		
 	}
-	
 }

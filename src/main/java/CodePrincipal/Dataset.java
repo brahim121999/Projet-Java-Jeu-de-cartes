@@ -26,7 +26,7 @@ public class Dataset {
 		this.RESOURCES_PATH = path;
 		this.FILE_NAME = file;
 		this.jeu = jeu;
-		
+		this.dataset = new HashMap<Integer, Data>();
 		
 	    final ArrayList<String[] > data = new ArrayList<String[] >();
 
@@ -63,22 +63,19 @@ public class Dataset {
 	            e.printStackTrace();
 	    }
 
-	        
-		
 		for (String[] info : data) {
 			
 			String equipe = info[0];
-			
 			String nom = info[1];
-			
 			String But = info[2];
-			int But2 = Integer.parseInt(But);
+			
+			int But2;
 			try {
 				But2 = Integer.valueOf(But);
 			} 
 			catch (NumberFormatException e) {
-				  // si le joueur n'a pas marque aucun but, 0 par defaut
-				But2 = (int) 0;
+				// si le joueur n'a pas marque aucun but, 0 par defaut
+				But2 = 0;
 			}
 			
 			String PassD = info[3];
@@ -87,97 +84,103 @@ public class Dataset {
 				PassD2 = Integer.valueOf(PassD);
 			} 
 			catch (NumberFormatException e) {
-				  // si le joueur n'a pas fait aucune passe decisive, 0 par defaut
-				PassD2 = (int) 0;
+				// si le joueur n'a pas fait aucune passe decisive, 0 par defaut
+				PassD2 = 0;
 			}
 			
 			String tacle = info[4]; 
-			int tacle2 = Integer.parseInt(tacle);
+			int tacle2;
 			try {
 				tacle2 = Integer.valueOf(tacle);
 			} 
 			catch (NumberFormatException e) {
-				  // si le joueur n'a pas fait aucun tacle, 0 par defaut
-				tacle2 = (int) 0;
+				// si le joueur n'a pas fait aucun tacle, 0 par defaut
+				tacle2 = 0;
 			}
 			
-			String PassR = info[5];
-			String PassR2 = PassR.substring(7,8);
-			double PassR3;
+			double PassR5;
 			try {
-				 PassR3 = Float.valueOf(PassR2)/100;
-			} 
-			catch (NumberFormatException e) {
-				// si pas de passe reussie, 0 par defaut
-				PassR3 = (float) 0.0;
+				String PassR = info[5];
+				String PassR2[] = PassR.split(" ");
+				String PassR3[] = PassR2[1].split("%");
+				String PassR4 = PassR3[0].substring(1);
+
+				try {
+					 PassR5 = Float.valueOf(PassR4)/100;
+				} 
+				catch (NumberFormatException e) {
+					// si pas de passe reussie, 0 par defaut
+					PassR5 = 0.0;
+				}
+			}
+			catch (ArrayIndexOutOfBoundsException e) {
+				PassR5 =  0.0;
 			}
 			
 			String TotDuelG = info[6];
-			String TotDuelG2 = TotDuelG.substring(0);
-			int TotDuelG3;
+			String TotDuelG2[] = TotDuelG.split(" ");
+			String TotDuelG3 = TotDuelG2[0];
+			int TotDuelG4;
 			try {
-				TotDuelG3 = Integer.valueOf(TotDuelG2);
+				TotDuelG4 = Integer.valueOf(TotDuelG3);
 			} 
 			catch (NumberFormatException e) {
-				  // si le joueur n'a pas gagne aucun duel, 0 par defaut
-				TotDuelG3 = (int) 0;
+				// si le joueur n'a pas gagne aucun duel, 0 par defaut
+				TotDuelG4 = (int) 0;
 			}
-			
+
 			String DauS = info[7];
-			String DauS2 = DauS.substring(0);
-			int DauS3;
+			String DauS2[] = DauS.split(" ");
+			String DauS3 = DauS2[0];
+			int DauS4;
 			try {
-				  DauS3 = Integer.valueOf(DauS2);
+				  DauS4 = Integer.valueOf(DauS3);
 			} 
 			catch (NumberFormatException e) {
 				  // si le joueur n'a pas fait aucun duel au sol, 0 par defaut
-				  DauS3 = (int) 0;
+				  DauS4 = (int) 0;
 			}
 			
 			String DA = info[8];
-			String DA2 = DA.substring(0);
-			int DA3;
+			String DA2[] = DA.split(" ");
+			String DA3 = DA2[0];
+			int DA4;
 			try {
-				  DA3 = Integer.valueOf(DA2);
+				  DA4 = Integer.valueOf(DA3);
 			} 
 			catch (NumberFormatException e) {
 				  // si le joueur n'a pas fait aucun duel aerrien, 0 par defaut
-				  DA3 = (int) 0;
+				  DA4 = (int) 0;
 			}
 			
 			String TempJ = info[9];
-			String TempJ2 = TempJ.substring(0,1);
-			int TempJ3;
+			String TempJ2[] = TempJ.split("'");
+			String TempJ3 = TempJ2[0];
+			int TempJ4;
 			try {
-				  TempJ3 = Integer.valueOf(TempJ2);
+				  TempJ4 = Integer.valueOf(TempJ3);
 			} 
 			catch (NumberFormatException e) {
 				  // si le joueur n'a pas joue, 0 par defaut
-				  TempJ3 = (int) 0;
+				  TempJ4 = (int) 0;
 			}
-			
+
 			String Poste = info[10];
-			
 			String Note = info[11];
+			
 			double note2;
 			try {
 				 note2 = Float.valueOf(Note);
 			} 
 			catch (NumberFormatException e) {
 				// si pas de note 0 par defaut
-				note2 = (float) 0.0;
+				note2 = 0.0;
 			}
 			
+			Data Donnees = new Data(equipe,nom,But2,PassD2,tacle2,PassR5,TotDuelG4,DA4,DauS4,TempJ4,Poste,note2);
+			Integer id = 0;
 			
-			
-			Data Donnees = new Data(equipe,nom,But2,PassD2,tacle2,PassR3,TotDuelG3,DA3,DauS3,TempJ3,Poste,note2);
-			
-			
-			
-			Integer id=0;
-			
-			Map<Integer,Equipe> liste_equipe = new HashMap();
-			liste_equipe= jeu.getListeEquipe();
+			Map<Integer,Equipe> liste_equipe = jeu.getListeEquipe();
 			
 			// on cherche l'id du joueur dans l'attribut liste_joeur de liste_equipe du systeme, pour eviter le cas ou 2 joueurs dans le jeu ont le meme nom , par contre c'est casi impossible au sein d'une meme equipe
 			
@@ -185,29 +188,20 @@ public class Dataset {
 				
 				Equipe e  = (Equipe) mapentry.getValue();
 				
-				if (e.getNom() == equipe) {
-					
-					
-						
-					for (int j : e.getListe_joueur()){
+				if (e.getNom().equals(equipe)) {	
+					for (Integer j : e.getListe_joueur()){
 						
 						Joueur joueur = this.jeu.getListeJoueur().get(j);
-						
-						if (joueur.getNom() == nom) {
+						if (joueur.getNom().equals(nom)) {
 							
 							id = joueur.getId_joueur();
 							break;
 						}
 					};
 				};
-				
-				
 			}
-			
 			this.dataset.put(id, Donnees);
 		}
-	
-		
 	}
 	
 	/*===============================================================================================*/
@@ -226,4 +220,15 @@ public class Dataset {
 		return this.RESOURCES_PATH;
 	}
 	
+	public Map<Integer, Data> getDataset() {
+		return this.dataset;
+	}
+	
+	public void afficher() {
+		for(Map.Entry mapentry : dataset.entrySet()) {
+			System.out.println("=== Joueur n° " + mapentry.getKey() + " ===");
+			Data d = (Data) mapentry.getValue();
+			d.afficher();
+		}
+	}
 }

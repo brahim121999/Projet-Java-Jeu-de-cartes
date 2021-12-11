@@ -138,7 +138,7 @@ public class Jeu {
 		System.out.println("nombre de carte : " + liste_carte.size());
 		System.out.println("nombre de carte en vente : " + liste_en_vente.size());
 		System.out.println("nombre de d'echange : " + liste_echange.size());
-		System.out.println("nombre de carte du système : " + liste_carte_systeme.size());
+		System.out.println("nombre de carte du systï¿½me : " + liste_carte_systeme.size());
 		System.out.println("nombre de classement utilisateur : " + liste_classement_utilisateur.size());
 		System.out.println("nombre de classement joueur : " + liste_classement_joueur.size());
 		System.out.println("nombre de dataset : " + liste_dataset.size());
@@ -240,7 +240,11 @@ public class Jeu {
 	
 	//chercher echange
 	public void afficherEchange() {
+		
+		System.out.println("hi");
 		for(Map.Entry mapentry : this.getListeEchange().entrySet()) {
+			
+			
 			Echange e = (Echange) mapentry.getValue();
 			e.afficher();
 		}
