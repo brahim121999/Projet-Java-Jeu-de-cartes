@@ -87,7 +87,7 @@ public class Player extends Utilisateur implements Comparable<Player>{
 	
 	@Override
 	public int compareTo(Player player) {
-		return (int)(this.score_player - player.getScore());
+		return (int)(player.getScore() - this.score_player);
 	}
 	
 	// deposer de l'argent
@@ -119,7 +119,7 @@ public class Player extends Utilisateur implements Comparable<Player>{
 		}
 	}
 	
-	// on ajoute la carte dans la liste des cartes a echanger du joueur et dans la liste des cartes a�echanger du jeu
+	// on ajoute la carte dans la liste des cartes a echanger du joueur et dans la liste des cartes a echanger du jeu
 	public void ajoutCarteEchange(Integer id_carte, rarete rarete_attendue, Integer joueur_attendu) {
 		Carte carte = jeu.getCarte(id_carte);
 		

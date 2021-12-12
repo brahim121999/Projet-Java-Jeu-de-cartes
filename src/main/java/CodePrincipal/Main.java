@@ -98,8 +98,8 @@ public class Main {
 		player.ajoutCarteEchange(0, rarete.commune, 5);
 		player2.echanger(0, 5550);
 		
-		player.afficherDetail();
-		player2.afficherDetail();
+		//player.afficherDetail();
+		//player2.afficherDetail();
 		
 		// Test d'une semaine
 		ArrayList<Integer> equipe_player = new ArrayList<Integer>();
@@ -116,7 +116,10 @@ public class Main {
 		equipe_player2.add(4440);
 		player2.setCarteSemaineSuivante(equipe_player2);
 		
+		System.out.println(player2.getCarteSemaineSuivante());
+		
         admin.miseAjourHebdo();
+        jeu.afficherClassementPlayer();
 	}
 
 }

@@ -202,7 +202,11 @@ public class Jeu {
 	}
 	
 	void afficherClassementPlayer() {
-		//affiche le dernier classement des utilisateurs en date
+		int cpt = 1;
+		for (Player mapentry : this.classement) {
+			
+			System.out.println(cpt + " position | ID : " + mapentry.getId() + " | pseudo : " + mapentry.getPseudo() + " | score : " + mapentry.getScore());
+		}
 	}
 	
 	void afficherClassementPlayer(int semaine) {
@@ -212,7 +216,7 @@ public class Jeu {
 	@SuppressWarnings("rawtypes")
 	public void chercherCarteDeJoueurAvendre(int id_joueur, rarete rar) {
 		//chercher carte en vente selon parametre
-        for (Map.Entry mapentry : this.getListeEnVente().entrySet()) {
+        for (Map.Entry mapentry : this.liste_en_vente.entrySet()) {
 
             Carte c  = (Carte) mapentry.getValue();
             int id1 = c.getIdJoueur();
@@ -226,7 +230,7 @@ public class Jeu {
 	@SuppressWarnings("rawtypes")
 	public void afficherCarteAVendre() {
 		//chercher carte en vente
-		for(Map.Entry mapentry : this.getListeEnVente().entrySet()) {
+		for(Map.Entry mapentry : this.liste_en_vente.entrySet()) {
 			
 			Carte c  = (Carte) mapentry.getValue();
 			c.afficher();
@@ -236,7 +240,7 @@ public class Jeu {
 	@SuppressWarnings("rawtypes")
 	public void chercherEchange(int id_joueur, rarete rar) {
 		//chercher echange selon parametre
-        for (Map.Entry mapentry : this.getListeEchange().entrySet()) {
+        for (Map.Entry mapentry : this.liste_echange.entrySet()) {
 
         	Echange e = (Echange) mapentry.getValue();
         	Carte c = getCarte(e.getCarteAEchange());
@@ -252,7 +256,7 @@ public class Jeu {
 	@SuppressWarnings("rawtypes")
 	public void afficherEchange() {
 		//chercher echange
-		for(Map.Entry mapentry : this.getListeEchange().entrySet()) {
+		for(Map.Entry mapentry : this.liste_echange.entrySet()) {
 			
 			Echange e = (Echange) mapentry.getValue();
 			e.afficher();

@@ -3,8 +3,6 @@ package CodePrincipal;
 public class Data {
 	//represente la performance d'un joueur sur un match donne
 	
-	private String club;
-	private String nom;
 	private float but;
 	private float passe_decisive;
 	private float tacle;
@@ -13,12 +11,9 @@ public class Data {
 	private float duel_aerien;
 	private float duel_sol ;
 	private float temps_de_jeu;		//en minute
-	private String poste;
 	private float note;
 	
-	public Data(String club, String nom,int but, int passe_decisive, int tacle, float passe_reussie, int duel_gagne, int duel_aerien, int duel_sol ,int temps_de_jeu, String poste, float note) {
-		this.club = club;
-		this.nom = nom;
+	public Data(float but, float passe_decisive, float tacle, float passe_reussie, float duel_gagne, float duel_aerien, float duel_sol ,float temps_de_jeu, float note) {
 		this.but = but;
 		this.passe_decisive = passe_decisive;
 		this.tacle = tacle;
@@ -27,14 +22,11 @@ public class Data {
 		this.duel_aerien = duel_aerien;
 		this.duel_sol = duel_sol;
 		this.temps_de_jeu = temps_de_jeu;
-		this.poste = poste;
 		this.note = note;
 	}
 	
 	public Data() {
 		//pour les joueurs n'ayant joué aucun match de la semaine
-		this.club = "";
-		this.nom = "";
 		this.but = 0;
 		this.passe_decisive = 0;
 		this.tacle = 0;
@@ -43,7 +35,6 @@ public class Data {
 		this.duel_aerien = 0;
 		this.duel_sol = 0;
 		this.temps_de_jeu = 0;
-		this.poste = "";
 		this.note = 0;
 	}
 	
@@ -78,10 +69,6 @@ public class Data {
 		return this.temps_de_jeu;
 	}
 	
-	public String getPoste() {
-		return this.poste;
-	}
-	
 	public float getNote() {
 		return this.note;
 	}
@@ -98,8 +85,6 @@ public class Data {
 	/*===============================================================================================*/
 	
 	public void afficher() {
-		System.out.println("Nom du joueur : " + nom );
-		System.out.println("Club : " + club );
 		System.out.println("Nombre de buts marques : " + but);
 		System.out.println("Nombre de passes decisives : " + passe_decisive);
 		System.out.println("Nombre de tacles : " + tacle);
@@ -109,13 +94,10 @@ public class Data {
 		System.out.println("Nombre de duels au sol : " + duel_sol);
 		System.out.println("Nombre de tacles : " + tacle);
 		System.out.println("Temps de jeu : " + temps_de_jeu);
-		System.out.println("Poste : " + poste);
 		System.out.println("Note : " + note);
 	}
 	
 	public void addData(Data data) {
-		this.club = "";
-		this.nom = "";
 		this.but += data.getBut();
 		this.passe_decisive += data.getPasse_decisive();
 		this.tacle += data.getTacle();
@@ -124,7 +106,6 @@ public class Data {
 		this.duel_aerien += data.getDuel_gagne();
 		this.duel_sol += data.getDuel_sol();
 		this.temps_de_jeu += data.getTemps_de_jeu();
-		this.poste = "";
 		this.note += data.getNote();
 	}
 	

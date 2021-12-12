@@ -164,7 +164,6 @@ public class Dataset {
 				  TempJ4 = (int) 0;
 			}
 
-			String Poste = info[10];
 			String Note = info[11];
 			
 			float note2;
@@ -176,7 +175,7 @@ public class Dataset {
 				note2 = 0;
 			}
 			
-			Data Donnees = new Data(equipe,nom,But2,PassD2,tacle2,PassR5,TotDuelG4,DA4,DauS4,TempJ4,Poste,note2);
+			Data Donnees = new Data(But2,PassD2,tacle2,PassR5,TotDuelG4,DA4,DauS4,TempJ4,note2);
 			Integer id = 0;
 			
 			Map<Integer,Equipe> liste_equipe = jeu.getListeEquipe();

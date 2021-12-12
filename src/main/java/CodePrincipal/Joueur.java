@@ -75,13 +75,16 @@ public class Joueur {
 			
 			for(Map.Entry mapentry2 : dataset.getDataset().entrySet()) {
 				
-				if(this.id_joueur == mapentry2.getKey()) {
+				if (this.id_joueur == mapentry2.getKey()) {
 					this.performance.addData((Data) mapentry2.getValue());
 					cpt += 1;
+					System.out.println(cpt);
 				}
 			}
 		}
-		this.performance.meanData(cpt);
+		if (cpt > 1) {
+			this.performance.meanData(cpt);
+		}
 	}
 	
 	public void afficher() {

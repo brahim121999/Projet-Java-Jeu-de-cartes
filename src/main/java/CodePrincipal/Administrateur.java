@@ -170,48 +170,71 @@ public class Administrateur extends Utilisateur {
 		jeu.setListeDataset(new HashMap<Integer, Dataset>());
 		
 		AddAllCSVToDataset();
+		
+		for(Entry<Integer, Joueur> j : jeu.getListeJoueur().entrySet()) {
+			j.getValue().getPerformance().afficher();
+		}
+		
+		
+		
 		CalculPerformancesJoueurs();
+		
+		for(Entry<Integer, Joueur> j : jeu.getListeJoueur().entrySet()) {
+			j.getValue().getPerformance().afficher();
+		}
+		
+		
 		CalculPerformancesPlayers();
 		CalculClassement();
-		
-		// on attribue les recompenses aux trois premiers players du classement hebdomadaire
-		Integer id_carte_rare = 0;
-		Integer id_carte_peu_commune = 0;
-		Integer id_carte_commune = 0;
-		for(Entry<Integer, Carte> mapentry : jeu.getListeCarteSysteme().entrySet()) {
-			if(mapentry.getValue().getRarete() == rarete.rare) {
-				id_carte_rare = mapentry.getKey();
-				break;
+
+		// on attribue les recompenses aux trois premiers players du classement hebdomadaire (si il y a au moins 3 joueurs dans le jeu)
+		if(jeu.getClassement().size() > 2) {
+			
+			Integer id_carte_rare = 0;
+			Integer id_carte_peu_commune = 0;
+			Integer id_carte_commune = 0;
+			
+			for(Entry<Integer, Carte> mapentry : jeu.getListeCarteSysteme().entrySet()) {
+				if(mapentry.getValue().getRarete() == rarete.rare) {
+					id_carte_rare = mapentry.getKey();
+					break;
+				}
 			}
-		}
-		
-		for(Entry<Integer, Carte> mapentry : jeu.getListeCarteSysteme().entrySet()) {
-			if(mapentry.getValue().getRarete() == rarete.peu_commune) {
-				id_carte_peu_commune = mapentry.getKey();
-				break;
+			
+			for(Entry<Integer, Carte> mapentry : jeu.getListeCarteSysteme().entrySet()) {
+				if(mapentry.getValue().getRarete() == rarete.peu_commune) {
+					id_carte_peu_commune = mapentry.getKey();
+					break;
+				}
 			}
-		}
-		
-		for(Entry<Integer, Carte> mapentry : jeu.getListeCarteSysteme().entrySet()) {
-			if(mapentry.getValue().getRarete() == rarete.commune) {
-				id_carte_commune = mapentry.getKey();
-				break;
+			
+			for(Entry<Integer, Carte> mapentry : jeu.getListeCarteSysteme().entrySet()) {
+				if(mapentry.getValue().getRarete() == rarete.commune) {
+					id_carte_commune = mapentry.getKey();
+					break;
+				}
 			}
-		}
-		
-		if(id_carte_rare != 0) {
-			jeu.getListeCarteSysteme().remove(id_carte_rare);
-			jeu.getClassement().get(0).getListeCarte().add(id_carte_rare);
-		}
-		
-		if(id_carte_peu_commune != 0) {
-			jeu.getListeCarteSysteme().remove(id_carte_peu_commune);
-			jeu.getClassement().get(0).getListeCarte().add(id_carte_peu_commune);
-		}
-		
-		if(id_carte_commune != 0) {
-			jeu.getListeCarteSysteme().remove(id_carte_commune);
-			jeu.getClassement().get(0).getListeCarte().add(id_carte_commune);
+			
+			if (id_carte_rare != 0) {
+				Player player = jeu.getClassement().get(0);
+				jeu.getCarte(id_carte_rare).setIdUtilisateur(player.getId());
+				jeu.getListeCarteSysteme().remove(id_carte_rare);
+				player.getListeCarte().add(id_carte_rare);
+			}
+			
+			if (id_carte_peu_commune != 0) {
+				Player player = jeu.getClassement().get(1);
+				jeu.getCarte(id_carte_rare).setIdUtilisateur(player.getId());
+				jeu.getListeCarteSysteme().remove(id_carte_peu_commune);
+				player.getListeCarte().add(id_carte_peu_commune);
+			}
+			
+			if (id_carte_commune != 0) {
+				Player player = jeu.getClassement().get(2);
+				jeu.getCarte(id_carte_rare).setIdUtilisateur(player.getId());
+				jeu.getListeCarteSysteme().remove(id_carte_commune);
+				player.getListeCarte().add(id_carte_commune);
+			}
 		}
 	}
 }
