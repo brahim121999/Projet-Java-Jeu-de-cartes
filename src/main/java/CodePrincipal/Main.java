@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import CapaciteSpeciale.Capacite_speciale;
 import CapaciteSpeciale.Lunatique;
@@ -17,12 +15,11 @@ public class Main {
 		
 		// Creation du jeu
 		Jeu jeu = Jeu.getInstance();
-		jeu.afficher();
 		
 		// Creation des comptes
-		Administrateur admin = new Administrateur("matteo", "1234", jeu);
-		Player player = new Player("brahim", "0000", jeu);
-		Player player2 = new Player("picarougne", "0000", jeu);
+		Administrateur admin = new Administrateur("admin", "0000", jeu);
+		Player player = new Player("joueur1", "0000", jeu);
+		Player player2 = new Player("joueur2", "0000", jeu);
 		
 		// Ajout des capacites speciales
 		Capacite_speciale lunatique = new Lunatique();
@@ -34,83 +31,91 @@ public class Main {
 		jeu.setListeCapaciteSpeciale(liste_capacite_speciale);
 		
 		// Creation des equipes et des joueurs
-		admin.ajouterEquipe(jeu, "FCChantrerie");
-		ArrayList<Integer> liste_equipe = new ArrayList<Integer>();
-		liste_equipe.add(0);
+		admin.ajouterEquipe(jeu, "FC Nantes");
+        ArrayList<Integer> nantes = new ArrayList<Integer>();
+        nantes.add(0);
+		admin.ajouterJoueur(jeu, "Ludovic Blas", true, nantes);
+		admin.ajouterJoueur(jeu, "Andrei Girotto", true, nantes);
+		admin.ajouterJoueur(jeu, "Pedro Chirivella", true, nantes);
+		admin.ajouterJoueur(jeu, "Nicolas Pallois", true, nantes);
+		admin.ajouterJoueur(jeu, "Moses Simon", true, nantes);
+		admin.ajouterJoueur(jeu, "Randal Kolo Muani", true, nantes);
+		admin.ajouterJoueur(jeu, "Roli Pereira De Sa", true, nantes);
+		admin.ajouterJoueur(jeu, "Jean-Charles Castelleto", true, nantes);
+		admin.ajouterJoueur(jeu, "Fábio", true, nantes);
+		admin.ajouterJoueur(jeu, "Alban Lafont", false, nantes);
+		admin.ajouterJoueur(jeu, "Dennis Appiah", true, nantes);
+		admin.ajouterJoueur(jeu, "Sébastien Corchia", true, nantes);
+		admin.ajouterJoueur(jeu, "Kalifa Coulibaly", true, nantes);
+		admin.ajouterJoueur(jeu, "Samuel Moutoussamy", true, nantes);
 		
-		admin.ajouterJoueur(jeu, "Brahim", true, liste_equipe);
-		admin.ajouterJoueur(jeu, "Matt", true, liste_equipe);
-		admin.ajouterJoueur(jeu, "Peter", false, liste_equipe);
+		admin.ajouterJoueur(jeu, "Quentin Merlin", true, nantes);
+		admin.ajouterJoueur(jeu, "Marcus Coco", true, nantes);
+		admin.ajouterJoueur(jeu, "Willem Geubbels", true, nantes);
+		admin.ajouterJoueur(jeu, "Wylan Cyprien", true, nantes);
+		admin.ajouterJoueur(jeu, "Jean-Charles Castelletto", true, nantes);
+		admin.ajouterJoueur(jeu, "Osman Bukari", true, nantes);
 		
-		jeu.afficher();
+		admin.ajouterEquipe(jeu, "France");
+        ArrayList<Integer> france = new ArrayList<Integer>();
+		france.add(1);
+		admin.ajouterJoueur(jeu, "Kylian Mbappé", true, france);
+		admin.ajouterJoueur(jeu, "Dayot Upamecano", true, france);
+		admin.ajouterJoueur(jeu, "Kurt Zouma", true, france);
+		admin.ajouterJoueur(jeu, "Aurélien Tchouaméni", true, france);
+		admin.ajouterJoueur(jeu, "Karim Benzema", true, france);
+		admin.ajouterJoueur(jeu, "Hugo Lloris", true, france);
+		admin.ajouterJoueur(jeu, "Lucas Digne", true, france);
+		admin.ajouterJoueur(jeu, "Antoine Griezmann", true, france);
+		admin.ajouterJoueur(jeu, "Léo Dubois", true, france);
+		admin.ajouterJoueur(jeu, "Jules Koundé", false, france);
+		admin.ajouterJoueur(jeu, "Benjamin Pavard", true, france);
+		admin.ajouterJoueur(jeu, "Kingsley Coman", true, france);
+		admin.ajouterJoueur(jeu, "Moussa Diaby", true, france);
+		admin.ajouterJoueur(jeu, "Adrien Rabiot", true, france);
+		admin.ajouterJoueur(jeu, "Mattéo Guendouzi", true, france);
+		admin.ajouterJoueur(jeu, "Jordan Veretout", true, france);
 		
 		// Creation des cartes
 		for(int i=0; i<jeu.getListeJoueur().size();i++) {
 			admin.ajouterCarte(i);
 		}
 		
-		// Test achat de cartes
-		jeu.afficher();
-        System.out.println(player.getBalance());
-        System.out.println(jeu.getListeCarte().get(2).getPrix());
-        player.acheterCarte(2);
-
-        System.out.println(player.getListeCarte());
-        System.out.println(player.getBalance());
-
-        player2.acheterCarte(550);
-        player2.ajoutCarteEnVente(550, 1000);
-
-        System.out.println(player.getListeCarte());
-        System.out.println(player2.getListeCarte());
-
-        player.acheterCarte(550);
-        
-        player2.acheterCarte(400);
-        System.out.println("/////");
-        System.out.println(jeu.getCarte(400).getRarete());
-        System.out.println(jeu.getCarte(400).getIdJoueur());
-        
-        // Test echange de cartes
-        player.acheterCarte(1120);
-        player.ajoutCarteEchange(1120, rarete.commune, 0);
-        
-        System.out.println(player.getListeCarte());
-        System.out.println(player2.getListeCarte());
-        
-        player2.echanger(0, 400);
-        
-        System.out.println(player.getListeCarte());
-        System.out.println(player2.getListeCarte());
-        
-        //String s = "Hello world !";
-        //System.out.println(s.substring(1));
-        
-       // Dataset
-        admin.ajouterEquipe(jeu, "FC Nantes");
-        ArrayList<Integer> liste_equipe2 = new ArrayList<Integer>();
-		liste_equipe2.add(1);
-		admin.ajouterJoueur(jeu, "Ludovic Blas", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Andrei Girotto", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Pedro Chirivella", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Nicolas Pallois", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Moses Simon", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Randal Kolo Muani", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Roli Pereira De Sa", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Jean-Charles Castelleto", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "FÃ¡bio", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Alban Lafont", false, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Dennis Appiah", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "SÃ©bastien Corchia", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Kalifa Coulibaly", true, liste_equipe2);
-		admin.ajouterJoueur(jeu, "Samuel Moutoussamy", true, liste_equipe2);
+		// Test achat/echange de cartes
+		player.acheterCarte(0);
+		player.acheterCarte(1110);
+		player.acheterCarte(2220);
+		player.acheterCarte(3330);
+		player.acheterCarte(4440);
 		
-        //Dataset data = new Dataset(42, "C:\\Users\\matte\\Desktop\\2021-boursault-braham-java\\Données-20211128\\0", "\\0_Nantes.csv", jeu);
-        //data.afficher();
-        
+		player2.acheterCarte(5550);
+		player2.acheterCarte(6660);
+		player2.acheterCarte(7770);
 		
+		player.ajoutCarteEnVente(4440, 1000);
+		player2.acheterCarte(4440);
 		
-		// ajouter les joueurs des autres csv
+		player.ajoutCarteEchange(0, rarete.commune, 5);
+		player2.echanger(0, 5550);
+		
+		player.afficherDetail();
+		player2.afficherDetail();
+		
+		// Test d'une semaine
+		ArrayList<Integer> equipe_player = new ArrayList<Integer>();
+		equipe_player.add(5550);
+		equipe_player.add(1110);
+		equipe_player.add(2220);
+		equipe_player.add(3330);
+		player.setCarteSemaineSuivante(equipe_player);
+		
+		ArrayList<Integer> equipe_player2 = new ArrayList<Integer>();
+		equipe_player2.add(0);
+		equipe_player2.add(6660);
+		equipe_player2.add(7770);
+		equipe_player2.add(4440);
+		player2.setCarteSemaineSuivante(equipe_player2);
+		
         admin.miseAjourHebdo();
 	}
 

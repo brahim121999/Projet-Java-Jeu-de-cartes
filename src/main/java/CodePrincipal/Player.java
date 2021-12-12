@@ -4,7 +4,7 @@ import java.util.*;
 
 import enumeration.rarete;
 
-public class Player extends Utilisateur{
+public class Player extends Utilisateur implements Comparable<Player>{
 	
 	private float balance;
 	private ArrayList<Integer> liste_carte;
@@ -24,7 +24,7 @@ public class Player extends Utilisateur{
 		this.echange = new ArrayList<Integer>();
 		this.score_player = 0;
 		this.jeu = jeu;
-		jeu.getListeUtilisateur().put(this.id_utilisateur, this);
+		jeu.getListePlayer().put(this.id_utilisateur, this);
 	}
 	
 	/*===============================================================================================*/
@@ -84,6 +84,11 @@ public class Player extends Utilisateur{
 	/*===============================================================================================*/
 	/*===============================================================================================*/
 	/*===============================================================================================*/
+	
+	@Override
+	public int compareTo(Player player) {
+		return (int)(this.score_player - player.getScore());
+	}
 	
 	// deposer de l'argent
 	public void augmenterBalance(float m) {
@@ -196,9 +201,7 @@ public class Player extends Utilisateur{
 			notre_carte.setIdUtilisateur(id_autre_utilisteur);
 			autre_utilisateur.getListeCarte().add(id_carte);
 			liste_carte.remove(id_carte);
-			
-			this.jeu.getListeCarte().get(notre_carte.getIdCarte()).setDisponibilite(true);
-			this.jeu.getListeCarte().get(autre_carte.getIdCarte()).setDisponibilite(true);
+			notre_carte.setDisponibilite(true);
 		}
 	}
 	
@@ -206,7 +209,7 @@ public class Player extends Utilisateur{
 	public void acheterCarte(Integer id_carte) {
 
         Carte carte = jeu.getCarte(id_carte);
-        Integer id_autre_utilisateur = carte.getIdUtilisateur(); // 0 si possï¿½dï¿½ par le jeu , n'importe quel autre entier sinon
+        Integer id_autre_utilisateur = carte.getIdUtilisateur(); // 0 si possedea par le jeu , n'importe quel autre entier sinon
 
 
         if (this.balance < carte.getPrix()) {
@@ -243,5 +246,36 @@ public class Player extends Utilisateur{
 			score += jeu.getCarte(id_carte).calculScore();
 		}
 		this.score_player = score;
+		this.balance += score * 1000;
+	}
+	
+	public void afficher() {
+		System.out.println("=== Player n° : " + id_utilisateur + " ===");
+		System.out.println("balance : " + balance);
+		System.out.println("liste des cartes : " + liste_carte);
+		System.out.println("carte semaine suivante : " + carte_semaine_suivante);
+		System.out.println("cartes en vente : " + carte_en_vente);
+		System.out.println("echanges en attente : " + echange);
+	}
+	
+	public void afficherDetail() {
+		System.out.println("=== Player n° : " + id_utilisateur + " ===");
+		System.out.println("balance : " + balance);
+		System.out.println("liste des cartes : ");
+		for (Integer c : liste_carte) {
+			jeu.getCarte(c).afficher();
+		}
+		System.out.println("carte semaine suivante : ");
+		for (Integer c : carte_semaine_suivante) {
+			jeu.getCarte(c).afficher();
+		}
+		System.out.println("cartes en vente : ");
+		for (Integer c : carte_en_vente) {
+			jeu.getCarte(c).afficher();
+		}
+		System.out.println("echanges en attente : ");
+		for (Integer e : echange) {
+			jeu.getEchange(e).afficher();
+		}
 	}
 }

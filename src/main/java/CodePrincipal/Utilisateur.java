@@ -13,4 +13,8 @@ public abstract class Utilisateur {
 		this.id_utilisateur = nb;
 		Utilisateur.nb += 1;
 	}
+	
+	public abstract void calculScoreHebdo();
+
+	public abstract int compareTo(Player player);
 }

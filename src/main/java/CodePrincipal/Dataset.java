@@ -7,36 +7,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import au.com.bytecode.opencsv.CSVReader;
 
 public class Dataset {
-	//represente toutes les donnees sur les joueurs pour une semaine
+	//represente toutes les donnees sur les joueurs pour un match
 	
 	private static int nb = 0;
 	private Integer id_dataset;
-	private Integer semaine;
 	private Map<Integer, Data> dataset; //couple id_joueur / Data
-	private String RESOURCES_PATH ;
-	private String FILE_NAME;
+	private String path;
 	private final static char SEPARATOR = '\t' ;
 	private Jeu jeu;
 	
 	
 	@SuppressWarnings({ "rawtypes", "static-access", "resource" })
-	public Dataset(Integer semaine,String path,String file,Jeu jeu) throws IOException {
+	public Dataset(String path, Jeu jeu) throws IOException {
 		this.id_dataset = nb;
 		Dataset.nb += 1;
-		this.semaine = semaine;
-		this.RESOURCES_PATH = "../../../../Data";
-		this.FILE_NAME = file;
+		this.path = path;
 		this.jeu = jeu;
 		this.dataset = new HashMap<Integer, Data>();
 		
 	    final ArrayList<String[] > data = new ArrayList<String[] >();
 
 	    try {
-	            final File fichier = new File(this.RESOURCES_PATH + this.FILE_NAME);
+	            final File fichier = new File(path);
 	            final FileReader fr = new FileReader(fichier);
 	            final CSVReader csvReader = new CSVReader(fr, this.SEPARATOR);
 
@@ -211,26 +206,20 @@ public class Dataset {
 	/*===============================================================================================*/
 	/*======================================= GETTER / SETTER =======================================*/
 	/*===============================================================================================*/
-	
 	public int getId_dataset() {
 		return this.id_dataset;
 	}
 	
-	public int getSemaine() {
-		return this.semaine;
-	}
-	
-	public String getFIleName() {
-		return this.FILE_NAME;
-	}
-	
 	public String getPath() {
-		return this.RESOURCES_PATH;
+		return this.path;
 	}
 	
 	public Map<Integer, Data> getDataset() {
 		return this.dataset;
 	}
+	/*===============================================================================================*/
+	/*===============================================================================================*/
+	/*===============================================================================================*/
 	
 	@SuppressWarnings("rawtypes")
 	public void afficher() {
