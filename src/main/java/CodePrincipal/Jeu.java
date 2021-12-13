@@ -161,8 +161,12 @@ public class Jeu {
 		return liste_capacite_speciale.get(id);
 	}
 	
-	public Utilisateur getUtilisateur(Integer id) {
+	public Player getUtilisateur(Integer id) {
 		return liste_player.get(id);
+	}
+	
+	public Administrateur getAdministrateur(Integer id) {
+		return liste_admin.get(id);
 	}
 	
 	public Carte getCarte(Integer id) {
