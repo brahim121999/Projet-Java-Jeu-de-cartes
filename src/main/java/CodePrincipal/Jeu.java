@@ -208,13 +208,9 @@ public class Jeu {
 	void afficherClassementPlayer() {
 		int cpt = 1;
 		for (Player mapentry : this.classement) {
-			
 			System.out.println(cpt + " position | ID : " + mapentry.getId() + " | pseudo : " + mapentry.getPseudo() + " | score : " + mapentry.getScore());
+			cpt+=1;
 		}
-	}
-	
-	void afficherClassementPlayer(int semaine) {
-		//affiche le classement des utilisateurs de la semaine placee en parametre
 	}
 	
 	@SuppressWarnings("rawtypes")
