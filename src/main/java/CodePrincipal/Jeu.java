@@ -205,7 +205,7 @@ public class Jeu {
 		liste_echange.remove(id_echange);
 	}
 	
-	void afficherClassementPlayer() {
+	public void afficherClassementPlayer() {
 		int cpt = 1;
 		for (Player mapentry : this.classement) {
 			System.out.println(cpt + " position | ID : " + mapentry.getId() + " | pseudo : " + mapentry.getPseudo() + " | score : " + mapentry.getScore());

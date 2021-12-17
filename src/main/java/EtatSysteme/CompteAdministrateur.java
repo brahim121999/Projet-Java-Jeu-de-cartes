@@ -26,20 +26,23 @@ public class CompteAdministrateur extends EtatSysteme {
 		System.out.println("##########################");
 		
 		@SuppressWarnings("resource")
-		Scanner saisieUtilisateur = new Scanner(System.in).useDelimiter("|");
-		String str = saisieUtilisateur.next();
+		
 		Administrateur admin = (Administrateur) systeme.getUtilisateur_courant();
 		boolean bool = true;
 		while(bool) {
+			Scanner saisieUtilisateur = new Scanner(System.in);
+			String str = saisieUtilisateur.next();
 			if (str.equals("m")) {
 				admin.miseAjourHebdo();
 			}
 
 			else if (str.equals("j")) {
 				System.out.println("Entrez le nom du joueur");
+				saisieUtilisateur = new Scanner(System.in);
 				String nom = saisieUtilisateur.next();
 				
 				System.out.println("Entrez son poste (g : goal, j : joueur de champ");
+				saisieUtilisateur = new Scanner(System.in).useDelimiter("|");
 				String poste = saisieUtilisateur.next();
 				boolean poste_bool;
 				while (!poste.equals("g") && !poste.equals("j")) {
@@ -50,10 +53,23 @@ public class CompteAdministrateur extends EtatSysteme {
 				}
 				else poste_bool = true;
 				
-				System.out.println("Entrez sa liste d'equipe (ex : 1|2|3|4");
+				System.out.println("Entrez sa liste d'equipe : (ex : 1/2/3");
+				
+
 				List<Integer> liste_equipe = new ArrayList<Integer>();
-				while (saisieUtilisateur.hasNextInt()) {
-					liste_equipe.add(saisieUtilisateur.nextInt());
+				Scanner scan = new Scanner(System.in);  
+				String equipe = scan.next();
+				String[] equipe2 = equipe.split("/");
+					
+				for (String j:equipe2) {
+					try {
+						Integer k = Integer.valueOf(j);
+						liste_equipe.add(k);
+					} 
+					catch (NumberFormatException e) {
+							  
+						System.out.println("Saisie incorrecte");
+					}
 				}
 				admin.ajouterJoueur(jeu, nom, poste_bool, liste_equipe);
 			}
@@ -63,6 +79,7 @@ public class CompteAdministrateur extends EtatSysteme {
 				for (Entry<Integer, Joueur> j : jeu.getListeJoueur().entrySet()) {
 					j.getValue().afficher();
 				}
+				System.out.println("Entrez l'id du joueur : ");
 				int id_joueur = saisieUtilisateur.nextInt();
 				admin.ajouterCarte(id_joueur);
 			}
@@ -72,6 +89,9 @@ public class CompteAdministrateur extends EtatSysteme {
 				EtatSysteme etat = new Connexion();
 				systeme.setEtat(etat);
 				bool = false;
+			}
+			else {
+				System.out.println("Saisie incorrecte");
 			}
 			
 		}

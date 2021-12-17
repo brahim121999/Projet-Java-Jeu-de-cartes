@@ -223,7 +223,7 @@ public class Dataset {
 	@SuppressWarnings("rawtypes")
 	public void afficher() {
 		for(Map.Entry mapentry : dataset.entrySet()) {
-			System.out.println("=== Joueur n° " + mapentry.getKey() + " ===");
+			System.out.println("=== Joueur nÂ° " + mapentry.getKey() + " ===");
 			Data d = (Data) mapentry.getValue();
 			d.afficher();
 		}

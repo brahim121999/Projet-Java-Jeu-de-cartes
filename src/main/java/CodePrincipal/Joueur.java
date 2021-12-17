@@ -77,7 +77,6 @@ public class Joueur {
 				if (this.id_joueur == mapentry2.getKey()) {
 					this.performance.addData((Data) mapentry2.getValue());
 					cpt += 1;
-					System.out.println(cpt);
 				}
 			}
 		}
@@ -87,7 +86,7 @@ public class Joueur {
 	}
 	
 	public void afficher() {
-		System.out.println("=== joueur n° : " + id_joueur + " ===");
+		System.out.println("=== joueur nï¿½ : " + id_joueur + " ===");
 		System.out.println("nom : " + nom);
 		System.out.println("poste : " + poste);
 		System.out.println("equipe(s) : ");

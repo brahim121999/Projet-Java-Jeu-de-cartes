@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
 
 import CapaciteSpeciale.Capacite_speciale;
 import CapaciteSpeciale.Lunatique;
@@ -42,10 +44,10 @@ public class Main {
 		admin.ajouterJoueur(jeu, "Randal Kolo Muani", true, nantes);
 		admin.ajouterJoueur(jeu, "Roli Pereira De Sa", true, nantes);
 		admin.ajouterJoueur(jeu, "Jean-Charles Castelleto", true, nantes);
-		admin.ajouterJoueur(jeu, "Fábio", true, nantes);
+		admin.ajouterJoueur(jeu, "Fï¿½bio", true, nantes);
 		admin.ajouterJoueur(jeu, "Alban Lafont", false, nantes);
 		admin.ajouterJoueur(jeu, "Dennis Appiah", true, nantes);
-		admin.ajouterJoueur(jeu, "Sébastien Corchia", true, nantes);
+		admin.ajouterJoueur(jeu, "Sï¿½bastien Corchia", true, nantes);
 		admin.ajouterJoueur(jeu, "Kalifa Coulibaly", true, nantes);
 		admin.ajouterJoueur(jeu, "Samuel Moutoussamy", true, nantes);
 		
@@ -59,21 +61,21 @@ public class Main {
 		admin.ajouterEquipe(jeu, "France");
         ArrayList<Integer> france = new ArrayList<Integer>();
 		france.add(1);
-		admin.ajouterJoueur(jeu, "Kylian Mbappé", true, france);
+		admin.ajouterJoueur(jeu, "Kylian Mbappï¿½", true, france);
 		admin.ajouterJoueur(jeu, "Dayot Upamecano", true, france);
 		admin.ajouterJoueur(jeu, "Kurt Zouma", true, france);
-		admin.ajouterJoueur(jeu, "Aurélien Tchouaméni", true, france);
+		admin.ajouterJoueur(jeu, "Aurï¿½lien Tchouamï¿½ni", true, france);
 		admin.ajouterJoueur(jeu, "Karim Benzema", true, france);
 		admin.ajouterJoueur(jeu, "Hugo Lloris", true, france);
 		admin.ajouterJoueur(jeu, "Lucas Digne", true, france);
 		admin.ajouterJoueur(jeu, "Antoine Griezmann", true, france);
-		admin.ajouterJoueur(jeu, "Léo Dubois", true, france);
-		admin.ajouterJoueur(jeu, "Jules Koundé", false, france);
+		admin.ajouterJoueur(jeu, "Lï¿½o Dubois", true, france);
+		admin.ajouterJoueur(jeu, "Jules Koundï¿½", false, france);
 		admin.ajouterJoueur(jeu, "Benjamin Pavard", true, france);
 		admin.ajouterJoueur(jeu, "Kingsley Coman", true, france);
 		admin.ajouterJoueur(jeu, "Moussa Diaby", true, france);
 		admin.ajouterJoueur(jeu, "Adrien Rabiot", true, france);
-		admin.ajouterJoueur(jeu, "Mattéo Guendouzi", true, france);
+		admin.ajouterJoueur(jeu, "Mattï¿½o Guendouzi", true, france);
 		admin.ajouterJoueur(jeu, "Jordan Veretout", true, france);
 		
 		// Creation des cartes
@@ -119,7 +121,20 @@ public class Main {
 		System.out.println(player2.getCarteSemaineSuivante());
 		
         admin.miseAjourHebdo();
-        jeu.afficherClassementPlayer();
+        
+       
+        
+        //jeu.afficherClassementPlayer();
+        
+        Systeme systeme = new Systeme(jeu);
+        systeme.action(); 
+		
+		
+	
+	
+		
+		
+        
 	}
 
 }

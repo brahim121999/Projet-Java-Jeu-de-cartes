@@ -127,7 +127,7 @@ public class Player extends Utilisateur implements Comparable<Player>{
 			System.out.println("Vous ne possï¿½dez pas la carte");
 		}
 		else if(!carte.getDisponibilite()) {
-			System.out.println("La carte a deja mise en vente ou proposee en echange");
+			System.out.println("La carte a ete deja mise en vente ou proposee en echange");
 		}
 		else {
 			carte.setDisponibilite(false);
@@ -250,7 +250,7 @@ public class Player extends Utilisateur implements Comparable<Player>{
 	}
 	
 	public void afficher() {
-		System.out.println("=== Player n° : " + id_utilisateur + " ===");
+		System.out.println("=== Player nï¿½ : " + id_utilisateur + " ===");
 		System.out.println("balance : " + balance);
 		System.out.println("liste des cartes : " + liste_carte);
 		System.out.println("carte semaine suivante : " + carte_semaine_suivante);
@@ -259,7 +259,7 @@ public class Player extends Utilisateur implements Comparable<Player>{
 	}
 	
 	public void afficherDetail() {
-		System.out.println("=== Player n° : " + id_utilisateur + " ===");
+		System.out.println("=== Player nï¿½ : " + id_utilisateur + " ===");
 		System.out.println("balance : " + balance);
 		System.out.println("liste des cartes : ");
 		for (Integer c : liste_carte) {

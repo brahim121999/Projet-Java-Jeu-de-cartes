@@ -15,6 +15,7 @@ public class Administrateur extends Utilisateur {
 	public Administrateur(String pseudo, String mdp, Jeu jeu) {
 		super(pseudo, mdp);
 		this.jeu=jeu;
+		jeu.getListeAdmin().put(this.id_utilisateur, this);
 	}
 
 	/*===============================================================================================*/
@@ -129,8 +130,8 @@ public class Administrateur extends Utilisateur {
 	}
 	
 	public void AddAllCSVToDataset() throws IOException {
-		// lis les CSV et en extrait les donnees dans des datasets, puis les ajoute à la liste des datasets de la semaine
-		String path = new File("").getAbsolutePath().concat("\\Data\\" + jeu.getSemaine().toString() + "\\");
+		// lis les CSV et en extrait les donnees dans des datasets, puis les ajoute ï¿½ la liste des datasets de la semaine
+		String path = new File("").getAbsolutePath().concat("/Data/" + jeu.getSemaine().toString() + "/");
 		File folder = new File(path);
 		File[] fichiers = folder.listFiles();
 		
@@ -170,20 +171,7 @@ public class Administrateur extends Utilisateur {
 		jeu.setListeDataset(new HashMap<Integer, Dataset>());
 		
 		AddAllCSVToDataset();
-		
-		for(Entry<Integer, Joueur> j : jeu.getListeJoueur().entrySet()) {
-			j.getValue().getPerformance().afficher();
-		}
-		
-		
-		
 		CalculPerformancesJoueurs();
-		
-		for(Entry<Integer, Joueur> j : jeu.getListeJoueur().entrySet()) {
-			j.getValue().getPerformance().afficher();
-		}
-		
-		
 		CalculPerformancesPlayers();
 		CalculClassement();
 
