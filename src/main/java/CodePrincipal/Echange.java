@@ -47,9 +47,9 @@ public class Echange {
 	/*===============================================================================================*/
 	
 	public void afficher() {
-		System.out.println("=== echange n° : " + id_echange + " ===");
+		System.out.println("=== echange numero : " + id_echange + " ===");
 		System.out.println("proprietaire : " + proprietaire);
-		System.out.println("carte proposée : ");
+		System.out.println("carte proposee : ");
 		jeu.getCarte(this.carte_a_echange).afficher();
 		System.out.println("id_joueur attendu : " + joueur_attendu);
 		System.out.println("joueur attendu : " + jeu.getJoueur(joueur_attendu).getNom());

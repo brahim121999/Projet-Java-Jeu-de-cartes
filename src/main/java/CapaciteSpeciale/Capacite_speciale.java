@@ -63,4 +63,8 @@ public abstract class Capacite_speciale extends CarteInterface{
 	/*===============================================================================================*/
 	
 	public abstract float calculScore();
+	
+	public void afficher() {
+		this.carte.afficher();
+	}
 }

@@ -14,18 +14,18 @@ import CodePrincipal.Systeme;
 
 public class CompteAdministrateur extends EtatSysteme {
 
+	@SuppressWarnings("resource")
 	@Override
 	public void action(Systeme systeme) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IOException {
 		Jeu jeu = systeme.getJeu();
 		
 		System.out.println("########## Menu ##########");
 		System.out.println("Mise a jour hebdomadaire : m");
+		System.out.println("Etat du jeu : e");
 		System.out.println("Ajouter joueur : j");
 		System.out.println("Ajouter carte : c");
 		System.out.println("Deconnexion : d");
 		System.out.println("##########################");
-		
-		@SuppressWarnings("resource")
 		
 		Administrateur admin = (Administrateur) systeme.getUtilisateur_courant();
 		boolean bool = true;
@@ -38,14 +38,15 @@ public class CompteAdministrateur extends EtatSysteme {
 
 			else if (str.equals("j")) {
 				System.out.println("Entrez le nom du joueur");
-				saisieUtilisateur = new Scanner(System.in);
+				saisieUtilisateur = new Scanner(System.in).useDelimiter("|");
 				String nom = saisieUtilisateur.next();
 				
-				System.out.println("Entrez son poste (g : goal, j : joueur de champ");
-				saisieUtilisateur = new Scanner(System.in).useDelimiter("|");
+				System.out.println("Entrez son poste (g : goal, j : joueur de champ)");
+				saisieUtilisateur = new Scanner(System.in);
 				String poste = saisieUtilisateur.next();
 				boolean poste_bool;
 				while (!poste.equals("g") && !poste.equals("j")) {
+					System.out.println("Saisie incorrecte ! Entrez son poste (g : goal, j : joueur de champ)");
 					poste = saisieUtilisateur.next();
 				}
 				if (poste.equals("g")) {
@@ -53,9 +54,8 @@ public class CompteAdministrateur extends EtatSysteme {
 				}
 				else poste_bool = true;
 				
-				System.out.println("Entrez sa liste d'equipe : (ex : 1/2/3");
-				
-
+				jeu.afficherListeEquipe();
+				System.out.println("Entrez sa liste d'equipe : (ex : 1/2/3)");
 				List<Integer> liste_equipe = new ArrayList<Integer>();
 				Scanner scan = new Scanner(System.in);  
 				String equipe = scan.next();
@@ -72,6 +72,7 @@ public class CompteAdministrateur extends EtatSysteme {
 					}
 				}
 				admin.ajouterJoueur(jeu, nom, poste_bool, liste_equipe);
+				System.out.println("Ajout réussi !");
 			}
 			
 			else if (str.equals("c")) {
@@ -84,6 +85,16 @@ public class CompteAdministrateur extends EtatSysteme {
 				admin.ajouterCarte(id_joueur);
 			}
 			
+			else if (str.equals("e")) {
+				jeu.afficher();
+			}
+			
+			else if (str.equals("d")) {
+				systeme.setUtilisateur_courant(null);
+				EtatSysteme etat = new Connexion();
+				systeme.setEtat(etat);
+				bool = false;
+			}
 			else if (str.equals("d")) {
 				systeme.setUtilisateur_courant(null);
 				EtatSysteme etat = new Connexion();

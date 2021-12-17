@@ -1,19 +1,20 @@
-package CodePrincipal;
-
+import static org.junit.Assert.*;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
 
 import CapaciteSpeciale.Capacite_speciale;
 import CapaciteSpeciale.Lunatique;
+import CodePrincipal.Administrateur;
+import CodePrincipal.Jeu;
+import CodePrincipal.Player;
 import enumeration.rarete;
 
-public class Main {
+public class Test {
 
-	public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, IOException {
+	@org.junit.Test
+	public void test() throws IOException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		
 		// Creation du jeu
 		Jeu jeu = Jeu.getInstance();
@@ -130,10 +131,20 @@ public class Main {
 		
         admin.miseAjourHebdo();
 
-        // Lancement du jeu
-        Systeme systeme = new Systeme(jeu);
-        systeme.action();
+        // Test
+        assertEquals(player.getListeCarte().size(), 5);
+        assertEquals(player2.getListeCarte().size(), 5);
+        assertEquals(player3.getListeCarte().size(), 5);
         
+        assertEquals(jeu.getListePlayer().size(), 3);
+        assertEquals(jeu.getListeEquipe().size(), 2);
+        assertEquals(jeu.getListeJoueur().size(), 36);
+        assertEquals(jeu.getListeCarte().size(), 39960);
+        assertEquals(jeu.getListeCarteSysteme().size(), 39945);
+        assertEquals(jeu.getListeEchange().size(), 0);
+        assertEquals(jeu.getListeEnVente().size(), 0);
+        assertEquals(jeu.getListeDataset().size(), 2);
+        assertEquals(jeu.getListeCapaciteSpeciale().size(), 2);
+        jeu.afficher();
 	}
-
 }

@@ -131,7 +131,7 @@ public class Administrateur extends Utilisateur {
 	
 	public void AddAllCSVToDataset() throws IOException {
 		// lis les CSV et en extrait les donnees dans des datasets, puis les ajoute � la liste des datasets de la semaine
-		String path = new File("").getAbsolutePath().concat("/Data/" + jeu.getSemaine().toString() + "/");
+		String path = new File("").getAbsolutePath().concat("\\Data\\" + jeu.getSemaine().toString() + "\\");
 		File folder = new File(path);
 		File[] fichiers = folder.listFiles();
 		

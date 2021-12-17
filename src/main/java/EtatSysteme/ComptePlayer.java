@@ -3,16 +3,14 @@ package EtatSysteme;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Map.Entry;
-
 import CodePrincipal.Player;
 import CodePrincipal.Jeu;
-import CodePrincipal.Joueur;
 import CodePrincipal.Systeme;
 import enumeration.rarete;
 
 public class ComptePlayer extends EtatSysteme{
 
+	@SuppressWarnings("resource")
 	@Override
 	public void action(Systeme systeme) {
 		Jeu jeu = systeme.getJeu();
@@ -23,7 +21,8 @@ public class ComptePlayer extends EtatSysteme{
 		System.out.println("Afficher les cartes en vente : v");
 		System.out.println("Afficher les echanges proposes : e");
 		System.out.println("Mettre une carte en vente : mv");
-		System.out.println("proposer un echange : pe");
+		System.out.println("Proposer un echange : pe");
+		System.out.println("Choisir les cartes de la semaine a jouer : j");
 		System.out.println("Deconnexion : d");
 		System.out.println("##########################");
 		
@@ -49,7 +48,7 @@ public class ComptePlayer extends EtatSysteme{
 				jeu.afficherCarteAVendre();
 			}
 			else if (str.contentEquals("e")) {
-				System.out.println("Liste des cartes en Ã©change disponibles : ");
+				System.out.println("Liste des cartes en echange disponibles : ");
 				jeu.afficherEchange();
 			}
 			else if (str.contentEquals("mv")) {
@@ -77,7 +76,7 @@ public class ComptePlayer extends EtatSysteme{
 				System.out.println("Pour la rarete veuillez saisir : r , pc ou c");
 				saisieUtilisateur = new Scanner(System.in);
 				String rarete_attendue = saisieUtilisateur.next();
-				System.out.println("Veuillez saisir l'id du joueur souhaitÃ© : ");
+				System.out.println("Veuillez saisir l'id du joueur souhaite : ");
 				saisieUtilisateur = new Scanner(System.in);
 				String joueur_attendu = saisieUtilisateur.next();
 				
@@ -112,6 +111,27 @@ public class ComptePlayer extends EtatSysteme{
 				EtatSysteme etat = new Connexion();
 				systeme.setEtat(etat);
 				bool = false;
+			}
+			
+			else if (str.equals("j")) {
+				System.out.println("Entrez sa liste des cartes que vous souhaitez jouer (ex : 1/2/3) : ");
+				ArrayList<Integer> liste_carte = new ArrayList<Integer>();
+				Scanner scan = new Scanner(System.in);  
+				String carte = scan.next();
+				String[] carte2 = carte.split("/");
+					
+				for (String j:carte2) {
+					try {
+						Integer k = Integer.valueOf(j);
+						liste_carte.add(k);
+					} 
+					catch (NumberFormatException e) {
+							  
+						System.out.println("Saisie incorrecte");
+					}
+				}
+				player.setCarteSemaineSuivante(liste_carte);
+				System.out.println("Opération réussie");
 			}
 			
 			else {

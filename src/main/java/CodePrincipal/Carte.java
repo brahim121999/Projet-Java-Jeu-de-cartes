@@ -81,13 +81,15 @@ public class Carte extends CarteInterface{
 	}
 	
 	public void afficher() {
-		System.out.println("=== carte n° : " + id_carte + " ===");
+		System.out.println("=== carte numero : " + id_carte + " ===");
 		System.out.println("id_joueur : " + id_joueur);
 		System.out.println("joueur : " + jeu.getJoueur(id_joueur).getNom());
 		System.out.println("prix : "+ prix);
 		System.out.println("rarete : " + rarete);
 		System.out.println("id_utilisateur : " + id_utilisateur);
 	}
+	
+	
 }
 
 

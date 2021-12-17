@@ -221,7 +221,7 @@ public class Player extends Utilisateur implements Comparable<Player>{
             this.balance -= carte.getPrix();
             this.liste_carte.add(carte.getIdCarte());
             carte.setIdUtilisateur(id_utilisateur);
-            this.jeu.getListeEnVente().remove(id_carte);
+            this.jeu.getListeCarteSysteme().remove(id_carte);
             this.jeu.getListeCarte().get(carte.getIdCarte()).setDisponibilite(true);
             System.out.println("Achat reussi !");
 
@@ -250,7 +250,7 @@ public class Player extends Utilisateur implements Comparable<Player>{
 	}
 	
 	public void afficher() {
-		System.out.println("=== Player n� : " + id_utilisateur + " ===");
+		System.out.println("=== Player numero : " + id_utilisateur + " ===");
 		System.out.println("balance : " + balance);
 		System.out.println("liste des cartes : " + liste_carte);
 		System.out.println("carte semaine suivante : " + carte_semaine_suivante);
@@ -259,7 +259,7 @@ public class Player extends Utilisateur implements Comparable<Player>{
 	}
 	
 	public void afficherDetail() {
-		System.out.println("=== Player n� : " + id_utilisateur + " ===");
+		System.out.println("=== Player numero : " + id_utilisateur + " ===");
 		System.out.println("balance : " + balance);
 		System.out.println("liste des cartes : ");
 		for (Integer c : liste_carte) {

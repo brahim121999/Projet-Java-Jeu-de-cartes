@@ -86,7 +86,7 @@ public class Joueur {
 	}
 	
 	public void afficher() {
-		System.out.println("=== joueur n� : " + id_joueur + " ===");
+		System.out.println("=== joueur numero : " + id_joueur + " ===");
 		System.out.println("nom : " + nom);
 		System.out.println("poste : " + poste);
 		System.out.println("equipe(s) : ");

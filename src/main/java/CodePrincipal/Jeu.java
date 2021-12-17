@@ -238,6 +238,16 @@ public class Jeu {
 	}
 	
 	@SuppressWarnings("rawtypes")
+	public void afficherListeEquipe() {
+		//chercher carte en vente
+		for(Map.Entry mapentry : this.liste_equipe.entrySet()) {
+			
+			Equipe e  = (Equipe) mapentry.getValue();
+			System.out.println("equipe id " + e.getId_equipe() + " : " + e.getNom());
+		}
+	}
+	
+	@SuppressWarnings("rawtypes")
 	public void chercherEchange(int id_joueur, rarete rar) {
 		//chercher echange selon parametre
         for (Map.Entry mapentry : this.liste_echange.entrySet()) {
