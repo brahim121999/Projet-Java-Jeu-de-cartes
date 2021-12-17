@@ -2,7 +2,7 @@
 
 Les fichiers des données des matchs doivent être ajoutés dans le dossier "Data", au format csv et dans des dossiers renommés selon le numéro de la semaine des matchs.
 
-Pour lancer le jeu, il suffit d'exécuter le main.
+Pour lancer le jeu, il suffit d'exécuter le main. Si vous êtes sur linux, il faut changer le chemin dans la méthode calculScorehebdo() en remplaçant les "\\" par des "/" au préalable.
 
 Le jeu contient déjà quelques cartes/joueurs/equipes/capacités spéciales/comptes player/admin.
 Pour en ajouter, il suffit de se connecter avec le compte admin et de suivre les instructions fournies par le jeu.
